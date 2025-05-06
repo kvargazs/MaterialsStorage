@@ -1,0 +1,63 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.search-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ededed;
+    padding: 20px 0 20px 240px;
+    z-index: 1000;
+}
+
+.container_materiais {
+    padding-top: 60px;
+}
+
+.input-search {
+    width: 50%;
+    height: 35px;
+    border-radius: 20px;
+}
+
+.button_search {
+    border-radius: 20px;
+}
+
+
+
+
+
+/* Estilos para a Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100%;
+    background-color: #343a40;
+    padding: 20px 15px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar a:hover {
+    background-color: #495057;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #495057;
+}
+
+.dropdown-toggle {
+    width: 100%;
+    text-align: start;
+}
+
