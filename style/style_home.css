@@ -103,7 +103,39 @@ body {
     text-align: start;
 }
 
+.nav {
+    gap: 10px;
+}
+
 .nav-link.active {
     background-color: rgb(60, 138, 255); /* Cor de fundo do link ativo */
 }
 
+.dropdown-menu {
+    background-color: #565e64 !important;
+    padding: 2px !important;
+}
+
+.dropdown-item {
+    color: #ffffff !important; 
+}
+
+.dropdown-item:hover {
+    background-color: #ffffff !important;
+    color: #565e64 !important;
+    border-radius: 5px !important;
+}
+
+.dropdown-baixa {
+    background-color: #ededed !important;
+    border-color: transparent;
+}
+
+.baixa {
+    color: #565e64 !important;
+}
+
+.baixa:hover {
+    background-color: #565e64 !important;
+    color: #fff !important;
+}
