@@ -4,23 +4,38 @@ body {
 }
 
 
-
-.search-bar {
+/* CAMPO DE PESQUISA */
+.search {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    height: 10%;
     background-color: #ededed;
     padding: 20px 0 20px 240px;
     z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-titulo {
+    font-size: 26px;
+    color: #343a40;
+    /* margin: 0px !important; */
 }
 
 .container_materiais {
     padding-top: 60px;
 }
 
+.search-bar {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+
 .input-search {
-    width: 50%;
+    width: 60%;
     height: 35px;
     border-radius: 20px;
 }
@@ -33,7 +48,7 @@ body {
 
 
 
-/* Estilos para a Sidebar */
+/* Sidebar */
 .sidebar {
     position: fixed;
     top: 0;
