@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/style_home.css">
+    <link rel="stylesheet" href="style/style_adicionarItem.css">
+    <title>Storage SENAI</title>
+</head>
+<body>
+    <div class="search">
+        <p class="search-titulo">Storage SENAI</p>
+        <div class="search-bar">
+            <input class="input-search" type="text" id="search" placeholder="   Pesquise por nome ou código de materiais...">
+            <button class="botao-search" type="button_search">Buscar</button>
+        </div>
+        <button class="botao-baixa btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Baixa</button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#"></a>Itens</li>
+        </ul>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div>
+            <!-- Menu de Navegação -->
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="home.html" class="nav-link text-white">Página inicial</a>
+                </li>
+                <li class="nav-item">
+                    <a href="adicionarItem.html" class="nav-link text-white active">Adicionar Item</a>
+                </li>
+                <li class="nav-item">
+                    <a href="historico.html" class="nav-link text-white">Histórico</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="container_dropdown">
+            <hr class="text-white">
+            <!-- Dropdown do Usuário -->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Perfil </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"></a>Configurações</li>
+                    <li><a class="dropdown-item" href="#"></a>Sair</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container_principal" href="#home">
+        
+        <div class="container_central">
+            <h3 class="titulo_central">Adicionar Item</h3>
+             <div class="containers">
+                <!-- primeiro container -->
+                <div class="container1">
+                    <div class="container_adicionar">
+                        <p>Nome</p>
+                        <input class="inputs input_nome" type="text" name="" id="" placeholder="...">
+                    </div>
+                    <div class="container_adicionar">
+                        <p>Código</p>
+                        <input class="inputs input_codigo" type="text" name="" id="" placeholder="...">
+                    </div>
+                    <div class="container_adicionar">
+                        <p>Segmento</p>
+                        <input class="inputs input_segmento" type="text" name="" id="" placeholder="...">
+                    </div>
+                </div>
+
+                <!-- segundo container -->
+                <div class="container2">
+                    <div class="container_adicionar">
+                        <p>Complemento</p>
+                        <input class="inputs input_complemento" type="text" name="" id="" placeholder="...">
+                    </div>
+                    <div class="container_adicionar">
+                        <p>Unidade</p>
+                        <input class="inputs input_unidade" type="text" name="" id="" placeholder="...">
+                    </div>
+                    <div class="container_adicionar">
+                        <p>Quantidade</p>
+                        <input class="inputs input_quantidade" type="text" name="" id="" placeholder="...">
+                    </div>
+                </div>
+            </div>
+
+            <button class="botao_enviar">Enviar</button>
+
+        </div>
+    </div>
+
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+</html>

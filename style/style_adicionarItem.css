@@ -1,0 +1,93 @@
+.container_principal{
+    width: auto;
+    height: 672px;
+    margin: 74px 0 0 220px;
+    padding: 50px 50px 50px 50px;
+    background-color: white;
+}
+
+.container_central{
+    width: auto;
+    height: 572px;
+    padding: 40px 16% 0 16%;
+    background-color: #ededed;
+    text-align: center;
+    border-radius: 10px;
+}
+.container_central p{
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.titulo_central{
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.containers{
+    width: auto;
+    height: 210px;
+    /* background-color: red; */
+    display: flex;
+    margin-bottom: 80px;
+}
+
+.container1{
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+.inputs{
+    width: 200px;
+}
+.input_nome{
+    margin-left: 43px;
+}
+.input_codigo{
+    margin-left: 30px;
+}
+.input_segmento{
+    margin-left: 0px;
+}
+.input_complemento{
+    margin-left: 19px;
+}
+.input_unidade{
+    margin-left: 80px;
+}
+.input_quantidade{
+    margin-left: 44px;
+}
+
+.container_adicionar{
+    width: 405px;
+    height: 50px;
+    display: flex;
+    padding: 10px;
+    margin-bottom: 30px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.container1 .container_adicionar{
+    width: 342px;
+}
+
+.botao_enviar{
+    width: 130px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: rgb(60, 138, 255);
+    border-color: transparent;
+    font-weight: 500;
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.botao_enviar:hover {
+    background-color: rgb(48, 112, 208);
+}
+
+.botao_enviar:active {
+    background-color: rgb(35, 94, 183);
+}
