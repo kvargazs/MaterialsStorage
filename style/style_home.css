@@ -11,15 +11,15 @@ body {
 .search {
     position: fixed;
     top: 0;
-    left: 220px;
-    width: calc(100% - 220px);
-    height: 10%;
+    left: 220px; /* Desloca a search bar para a direita da sidebar */
+    width: calc(100% - 220px); /* Ocupa o restante da largura da tela */
+    height: 10vh; /* A altura será 10% da tela */
     background-color: #ededed;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 20px; /* Adiciona padding nas laterais */
 }
 
 .search-titulo {
@@ -75,7 +75,7 @@ body {
 
 
 
-/* Sidebar */
+/* SIDEBAR */
 .sidebar {
     position: fixed;
     top: 0;
@@ -138,4 +138,45 @@ body {
 .baixa:hover {
     background-color: #565e64 !important;
     color: #fff !important;
+}
+
+
+
+
+
+
+
+/* CONTAINER PRINCIPAL */
+.container_home {
+    position: relative;
+    top: 10vh;
+    left: 220px;
+    width: calc(100% - 220px);
+    height: calc(100vh - 10vh);
+    padding: 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: rgb(255, 255, 255);
+}
+
+.titulo-materiais {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+    padding-bottom: 30px;
+}
+
+.container_itens {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+}
+
+.itens {
+    width: 18%;
+    height: 40%;
+    background-color: rgb(205, 205, 205);
+    padding: 20px;
 }
