@@ -1,6 +1,14 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
 .container_principal{
-    width: auto;
-    height: 672px;
+    left: 220px;
+    width: calc(100% - 220px);
+    top: 10%;
+    height: calc(100% - 10%);
     margin: 74px 0 0 220px;
     padding: 50px 50px 50px 50px;
     background-color: white;
