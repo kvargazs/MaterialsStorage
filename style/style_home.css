@@ -27,6 +27,7 @@ body {
     color: #343a40;
     text-align: center;
     margin-bottom: 0px !important;
+    font-weight: 500;
 }
 
 .container_materiais {
@@ -43,12 +44,25 @@ body {
     height: 35px;
     border-radius: 20px;
     margin-right: 1%;
+    border-color: transparent;
 }
 
 .botao-search {
     width: 80px;
     height: 35px;
     border-radius: 20px;
+    background-color: rgb(60, 138, 255);
+    border-color: transparent;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.botao-search:hover {
+    background-color: rgb(48, 112, 208);
+}
+
+.botao-search:active {
+    background-color: rgb(35, 94, 183);
 }
 
 .botao-baixa {
@@ -87,5 +101,9 @@ body {
 .dropdown-toggle {
     width: 100%;
     text-align: start;
+}
+
+.nav-link.active {
+    background-color: rgb(60, 138, 255); /* Cor de fundo do link ativo */
 }
 
