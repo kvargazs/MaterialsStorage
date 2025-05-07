@@ -21,7 +21,8 @@ body {
 .search-titulo {
     font-size: 26px;
     color: #343a40;
-    /* margin: 0px !important; */
+    text-align: center;
+    margin-bottom: 0px !important;
 }
 
 .container_materiais {
@@ -31,7 +32,7 @@ body {
 .search-bar {
     width: 70%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .input-search {
