@@ -68,7 +68,13 @@
         <p class="titulo-materiais">MATERIAIS</p>
         <div class="container_itens" id="itens-container">
             <!-- Os itens serão adicionados aqui dinamicamente -->
-            <div class="itens">
+            <div class="itens" 
+                 data-nome="Resistor" 
+                 data-codigo="12345" 
+                 data-segmento="Elétrica" 
+                 data-complemento="Resistor para 100 volts blablabla blaaaaaaaaaaaaaaaaaa" 
+                 data-quantidade="5" 
+                 data-unidade="kg">
                 <p class="item-caracteristica item-nome">Resistor</p>
                 <p class="item-caracteristica item-codigo">Cód: 12345</p>
                 <p class="item-caracteristica item-segmento">Segmento: Elétrica</p>
@@ -79,6 +85,29 @@
                 </div>
             </div>
         </div>
+    
+        <!-- Modal -->
+        <div class="modal fade" id="itemModal" tabindex="-1" aria-labelledby="itemModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-nome"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modal-segmento">Segmento: </p>
+                        <p id="modal-complemento">Complemento: </p>
+                        <p id="modal-quantidade">Quantidade: </p>
+                        <p id="modal-unidade">Unidade: </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Editar</button>
+                        <button type="button" class="btn btn-success">Dar baixa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
     
 

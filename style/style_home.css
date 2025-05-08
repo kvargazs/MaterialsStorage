@@ -161,7 +161,7 @@ p {
     padding: 30px;
     box-sizing: border-box;
     overflow-y: auto;
-    background-color: #ededed
+    background-color: #ededed;
 }
 
 .titulo-materiais {
@@ -194,10 +194,23 @@ p {
     box-sizing: border-box;
     text-align: center;
     border-radius: 5px;
+    border: 2px solid transparent;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    transition: transform 0.3s ease, border 0.3s ease;
+    cursor: pointer;
+}
+
+.itens:hover {
+    transform: scale(1.05);
+    border: 2px solid #565e64;
+}
+
+.itens:active {
+    transform: scale(1.05);
+    border: 2px solid #565e64;
 }
 
 /* RESPONSIVIDADE - Menos colunas em telas menores */
@@ -246,6 +259,8 @@ p {
     font-size: 20px;
     font-weight: 600;
     color: #343a40;
+    border-bottom: 1px solid #b4b4b4;
+    margin-bottom: 5px;
 }
 
 .item-codigo {
@@ -275,6 +290,63 @@ p {
     display: flex;
     justify-content: space-between;
 }
+
+
+
+
+
+/* MODAL POP-UP */
+.modal-content {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modal-body {
+    font-size: 16px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Modal: Nome e Código */
+#modal-nome {
+    display: inline-flex;
+    align-items: center; /* Alinha o nome e o código verticalmente */
+    font-weight: bold;
+    margin-right: 10px; /* Dá um espaçamento entre nome e código */
+}
+
+#modal-codigo {
+    color: #007bff; /* Cor azul para o código */
+    margin-left: 5px; /* Distância entre o nome e o código */
+}
+
+#modal-nome span {
+    margin-left: 5px;
+}
+
+#modal-segmento {
+    font-weight: 600;
+    color: #333; /* Um tom mais escuro, opcional */
+}
+
+.modal-body p {
+    margin-bottom: 10px; /* ou ajuste conforme preferir */
+}
+
+
+
+
+
 
 
 
