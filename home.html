@@ -17,12 +17,14 @@
     <title>Storage SENAI</title>
 </head>
 <body>
+    <!-- BARRA SUPERIOR DE PESQUISA -->
     <div class="search">
         <p class="search-titulo">Storage SENAI</p>
         <div class="search-bar">
             <input class="input-search" type="text" id="search" placeholder="   Pesquise por nome ou código de materiais...">
             <button class="botao-search" type="button_search">Buscar</button>
         </div>
+        <!-- dropdown de itens para baixa -->
         <button class="botao-baixa btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Baixa</button>
         <ul class="dropdown-menu dropdown-baixa">
             <li><a class="dropdown-item baixa" href="#">Itens</a></li>
@@ -34,10 +36,9 @@
         </ul>
     </div>
 
-    <!-- Sidebar -->
+    <!-- SIDEBAR -->
     <div class="sidebar">
         <div>
-            <!-- Menu de Navegação -->
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
                     <a href="home.html" class="nav-link text-white active">Página inicial</a>
@@ -50,10 +51,9 @@
                 </li>
             </ul>
         </div>
-        
+        <!-- Dropdown do Usuário -->
         <div class="container_dropdown">
             <hr class="text-white">
-            <!-- Dropdown do Usuário -->
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Perfil </button>
                 <ul class="dropdown-menu">
@@ -66,12 +66,18 @@
 
     <section class="container_home">
         <p class="titulo-materiais">MATERIAIS</p>
-        <div class="container_itens" href="#home">
-            <div class="itens"><p>ITEM</p></div>
-            <div class="itens"><p>ITEM</p></div>
-            <div class="itens"><p>ITEM</p></div>
-            <div class="itens"><p>ITEM</p></div>
-            <div class="itens"><p>ITEM</p></div>
+        <div class="container_itens" id="itens-container">
+            <!-- Os itens serão adicionados aqui dinamicamente -->
+            <div class="itens">
+                <p class="item-caracteristica item-nome">Resistor</p>
+                <p class="item-caracteristica item-codigo">Cód: 12345</p>
+                <p class="item-caracteristica item-segmento">Segmento: Elétrica</p>
+                <p class="item-caracteristica item-complemento">Resistor para 100 volts blablabla blaaaaaaaaaaaaaaaaaa</p>
+                <div class="div-item-info">
+                    <p class="item-caracteristica item-quantidade">Qntd: 5</p>
+                    <p class="item-caracteristica item-unidade">Unid: kg</p>
+                </div>
+            </div>
         </div>
     </section>
     

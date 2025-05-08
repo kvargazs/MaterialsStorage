@@ -6,25 +6,30 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+p {
+    margin: 0;
+}
+
 
 /* CAMPO DE PESQUISA */
 .search {
     position: fixed;
     top: 0;
-    left: 220px; /* Desloca a search bar para a direita da sidebar */
-    width: calc(100% - 220px); /* Ocupa o restante da largura da tela */
-    height: 10vh; /* A altura será 10% da tela */
-    background-color: #ededed;
+    left: 220px;
+    width: calc(100% - 220px); 
+    height: 10vh;
+    background-color: #343a40;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px; /* Adiciona padding nas laterais */
+    padding: 0 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);  
 }
 
 .search-titulo {
     font-size: 26px;
-    color: #343a40;
+    color: #ffffff;
     text-align: center;
     margin-bottom: 0px !important;
     font-weight: 500;
@@ -71,6 +76,22 @@ body {
     text-align: center !important;
 }
 
+.dropdown-baixa {
+    background-color: #ededed !important;
+    border-color: transparent;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);  
+}
+
+.baixa {
+    color: #565e64 !important;
+}
+
+.baixa:hover {
+    background-color: #565e64 !important;
+    color: #fff !important;
+}
+
+
 
 
 
@@ -113,7 +134,8 @@ body {
 
 .dropdown-menu {
     background-color: #565e64 !important;
-    padding: 2px !important;
+    padding: 15px 0px !important;
+    box-shadow: 4px 2px 6px rgba(0, 0, 0, 0.2);  
 }
 
 .dropdown-item {
@@ -123,30 +145,13 @@ body {
 .dropdown-item:hover {
     background-color: #ffffff !important;
     color: #565e64 !important;
-    border-radius: 5px !important;
-}
-
-.dropdown-baixa {
-    background-color: #ededed !important;
-    border-color: transparent;
-}
-
-.baixa {
-    color: #565e64 !important;
-}
-
-.baixa:hover {
-    background-color: #565e64 !important;
-    color: #fff !important;
 }
 
 
 
 
 
-
-
-/* CONTAINER PRINCIPAL */
+/* CONTAINER PRINCIPAL DE ITENS */
 .container_home {
     position: relative;
     top: 10vh;
@@ -156,7 +161,7 @@ body {
     padding: 30px;
     box-sizing: border-box;
     overflow-y: auto;
-    background-color: rgb(255, 255, 255);
+    background-color: #ededed
 }
 
 .titulo-materiais {
@@ -166,17 +171,110 @@ body {
     padding-bottom: 30px;
 }
 
+/* CONTAINER DE ITENS */
 .container_itens {
-    width: 100%;
-    height: 100%;
     display: flex;
-    justify-content: space-between;
-    background-color: rgb(255, 255, 255);
+    flex-wrap: wrap; 
+    gap: 3vh; 
+    width: 100%;
+    height: auto;
+    background-color: #ededed
 }
 
+
+
+
+
+/* ESTILO DE CADA ITEM */
 .itens {
-    width: 18%;
-    height: 40%;
-    background-color: rgb(205, 205, 205);
+    width: calc(20% - 20px); /* 5 itens por linha, com um espaço entre eles */
+    height: auto;
+    background-color: rgb(255, 255, 255);
     padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
+
+/* RESPONSIVIDADE - Menos colunas em telas menores */
+/* 4 colunas quando a tela for menor que 1200px */
+@media (min-width: 1201px) {
+    .itens {
+        width: calc(20% - 20px); /* 5 colunas por linha */
+    }
+}
+
+/* 4 colunas quando a tela for menor que 1200px */
+@media (max-width: 1200px) {
+    .itens {
+        width: calc(25% - 20px); /* 4 colunas por linha */
+    }
+}
+
+/* 3 colunas quando a tela for menor que 900px */
+@media (max-width: 900px) {
+    .itens {
+        width: calc(33.33% - 20px); /* 3 colunas por linha */
+    }
+}
+
+/* 2 colunas quando a tela for menor que 600px */
+@media (max-width: 600px) {
+    .itens {
+        width: calc(50% - 20px); /* 2 colunas por linha */
+    }
+}
+
+/* 1 coluna quando a tela for menor que 400px */
+@media (max-width: 400px) {
+    .itens {
+        width: calc(100% - 20px); /* 1 coluna por linha */
+    }
+}
+
+.item-caracteristica {
+    text-align: start;
+    font-size: 16px;
+}
+
+.item-nome {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.item-codigo {
+    color: rgb(60, 138, 255);
+    text-decoration: underline;
+}
+
+.item-complemento {
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;              /* Número de linhas máximas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 4.5em;                  /* Altura máxima com base em 2 linhas */
+    line-height: 1.5em;                 /* Altura de cada linha (ajuste se necessário) */
+    word-break: break-word; 
+}
+
+.item-segmento {
+    font-weight: 500;
+    padding-bottom: 20px;
+}
+
+.div-item-info {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
