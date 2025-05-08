@@ -187,7 +187,7 @@ p {
 
 /* ESTILO DE CADA ITEM */
 .itens {
-    width: calc(20% - 20px); /* 5 itens por linha, com um espaço entre eles */
+    width: calc(20% - 20px);
     height: auto;
     background-color: rgb(255, 255, 255);
     padding: 20px;
@@ -204,35 +204,35 @@ p {
 /* 4 colunas quando a tela for menor que 1200px */
 @media (min-width: 1201px) {
     .itens {
-        width: calc(20% - 20px); /* 5 colunas por linha */
+        width: calc(20% - 20px);
     }
 }
 
 /* 4 colunas quando a tela for menor que 1200px */
 @media (max-width: 1200px) {
     .itens {
-        width: calc(25% - 20px); /* 4 colunas por linha */
+        width: calc(25% - 20px);
     }
 }
 
 /* 3 colunas quando a tela for menor que 900px */
 @media (max-width: 900px) {
     .itens {
-        width: calc(33.33% - 20px); /* 3 colunas por linha */
+        width: calc(33.33% - 20px);
     }
 }
 
 /* 2 colunas quando a tela for menor que 600px */
 @media (max-width: 600px) {
     .itens {
-        width: calc(50% - 20px); /* 2 colunas por linha */
+        width: calc(50% - 20px); 
     }
 }
 
 /* 1 coluna quando a tela for menor que 400px */
 @media (max-width: 400px) {
     .itens {
-        width: calc(100% - 20px); /* 1 coluna por linha */
+        width: calc(100% - 20px);
     }
 }
 
@@ -256,12 +256,12 @@ p {
 .item-complemento {
     text-align: center;
     display: -webkit-box;
-    -webkit-line-clamp: 2;              /* Número de linhas máximas */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 4.5em;                  /* Altura máxima com base em 2 linhas */
-    line-height: 1.5em;                 /* Altura de cada linha (ajuste se necessário) */
+    max-height: 4.5em;
+    line-height: 1.5em;          
     word-break: break-word; 
 }
 
@@ -271,7 +271,7 @@ p {
 }
 
 .div-item-info {
-    padding: 20px 0;
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
 }

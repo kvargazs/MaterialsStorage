@@ -1,4 +1,4 @@
-// Obter o caminho atual da URL
+// SIDEBAR SELECIONADA
 var currentPath = window.location.pathname;
 
 // Selecionar todos os links de navegação
@@ -14,7 +14,7 @@ links.forEach(function(link) {
 
 
 
-// adicionar um item dinamicamente
+// NOVO ITEM
 document.addEventListener("DOMContentLoaded", function() {
     const container = document.getElementById("itens-container");
 
@@ -22,11 +22,10 @@ document.addEventListener("DOMContentLoaded", function() {
     function adicionarItem(nomeItem) {
         const novoItem = document.createElement("div");
         novoItem.classList.add("itens");
-        novoItem.innerHTML = nomeItem;  // O conteúdo do item pode ser o nome do material ou qualquer coisa
+        novoItem.innerHTML = nomeItem;
         container.appendChild(novoItem);
     }
 
-    // Exemplo de adicionar 10 itens
     for (let i = 1; i <= 8; i++) {
         adicionarItem(`ITEM ${i}`);
     }
