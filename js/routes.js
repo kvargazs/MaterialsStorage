@@ -7,6 +7,7 @@ import {sql, poolPromise} from './db.js';
 //cria um roteador(router) para agrupar as rotas do servidor
 const router = express.Router();
 
+//INSERIR ITEM NO BANCO
 router.post('/inserir', async (req, res) => {
     const { nome, codigo, segmento, complemento, unidade, quantidade } = req.body;
 
@@ -52,6 +53,30 @@ router.post('/inserir', async (req, res) => {
 
     } catch (error) {
         console.error('Erro ao inserir ou atualizar item:', error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+
+// ROTA GET PARA PUXAR OS ITENS DO BANCO PARA A PAGINA
+router.get('/itens', async (req, res) => {
+    try {
+        const pool = await poolPromise;
+
+        //faz a consulta no banco de dados
+        const result = await pool.request().query('SELECT Codigo, nome, Segmento, Complemento, Quantidade, Unidade FROM Itens');
+
+        //verifica se tem itens na resposta
+        if (result.recordset.length > 0) {
+            //envia como JSON
+            res.json(result.recordset);
+        } else {
+            //dse não tiver itens, responde com um array vazio
+            res.json([]);
+        }
+    } catch (error) {
+        console.error('Erro ao consultar os itens:', error);
         res.status(500).json({ message: error.message });
     }
 });
