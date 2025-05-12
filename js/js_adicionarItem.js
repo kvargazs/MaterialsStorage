@@ -1,6 +1,7 @@
 // Função para enviar os dados para o servidor
 function EnviarItem() {
-    const nome = document.getElementById('input_nome').value;
+    //const nome = document.getElementById('input_nome').value;
+    const nome = document.getElementById('input_nome').value.toLowerCase();
     const codigo = document.getElementById('input_codigo').value;
     const segmento = document.getElementById('input_segmento').value;
     const complemento = document.getElementById('input_complemento').value;
