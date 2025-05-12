@@ -2,24 +2,25 @@ body {
     padding: 0;
     margin: 0;
     font-family: "Poppins", sans-serif;
+    background-color: #ededed;
 }
 
 .container_principal{
     left: 220px;
     width: calc(100% - 220px);
-    top: 10%;
-    height: calc(100% - 10%);
-    margin: 74px 0 0 220px;
-    padding: 50px 50px 50px 50px;
+    top: 10vh;
+    height: calc(100vh - 10vh);
+    margin: 35px 0 0 220px;
+    /* padding: 50px 50px 0px 50px; */
     background-color: white;
 }
 
 .container_central{
     width: auto;
-    height: 572px;
+    height: 650px;
     padding: 40px 16% 0 16%;
     background-color: #ededed;
-    text-align: center;
+    /* text-align: center; */
     border-radius: 10px;
 }
 .container_central p{
@@ -29,27 +30,74 @@ body {
 
 .titulo_central{
     text-align: center;
-    margin-bottom: 70px;
+    margin-top: 30px;
+    margin-bottom: 45px;
+    /* background-color: white; */
+}
+
+.contorno{
+    border: 5px solid white;
+    border-radius: 2%;
+    padding: 20px 0 70px 0;
+    background-color: white;
 }
 
 .containers{
     width: auto;
-    height: 210px;
+    height: 366px;
     /* background-color: red; */
-    display: flex;
-    margin-bottom: 80px;
+    /* display: flex; */
+    margin-bottom: 30px;
 }
+
+
+form label{
+    margin-left: 30px;
+}
+
+.form-control{
+    width: 770px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.label-unidade, .label-segmento{
+    width: 330px;
+}
+
+.selecionaveis{
+    display: flex;
+    gap: 170px;
+}
+
+
 
 .container1{
     margin-right: 10px;
-    margin-left: 20px;
+    margin-left: 3.5%;
+}
+
+.container-de-cima{
+    width: auto;
+    height: 200px;
+    /* background-color: bisque; */
+    padding-left: 200px;
+    margin-bottom: 35px;
+}
+
+.containers-juntos{
+    width: auto;
+    height: 160px;
+    /* background-color: red; */
+    display: flex;
+    margin-bottom: 80px;
 }
 
 .inputs{
     width: 200px;
 }
 .input_nome{
-    margin-left: 43px;
+    margin-left: 105px;
 }
 .input_codigo{
     margin-left: 30px;
@@ -57,9 +105,18 @@ body {
 .input_segmento{
     margin-left: 0px;
 }
-.input_complemento{
+/* .input_complemento{
     margin-left: 19px;
+} */
+ .inputs.input_complemento {
+  width: 200px;
+  height: 100px;
+  font-size: 16px;
+  margin-left: 19px;
+  padding: 10px;
+  resize: vertical; /* permite redimensionar só na vertical */
 }
+
 .input_unidade{
     margin-left: 80px;
 }
@@ -73,7 +130,17 @@ body {
     display: flex;
     padding: 10px;
     margin-bottom: 30px;
-    background-color: white;
+    background-color: #ededed;
+    border-radius: 5px;
+}
+
+.container_complemento{
+    width: 405px;
+    height: 120px;
+    display: flex;
+    padding: 10px;
+    margin-bottom: 30px;
+    background-color: #ededed;
     border-radius: 5px;
 }
 
@@ -98,4 +165,9 @@ body {
 
 .botao_enviar:active {
     background-color: rgb(35, 94, 183);
+}
+
+.classe_do_botao{
+    margin-top: 10px;
+    text-align: center;
 }

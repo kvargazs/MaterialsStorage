@@ -59,41 +59,94 @@
         
         <div class="container_central">
             <h3 class="titulo_central">Adicionar Item</h3>
-             <div class="containers">
-                <!-- primeiro container -->
-                <div class="container1">
-                    <div class="container_adicionar">
-                        <p>Nome</p>
-                        <input class="inputs input_nome" type="text" name="" id="input_nome" placeholder="...">
+            <div class="contorno">
+                <div class="containers">
+                    
+                    <!-- <div class="container-de-cima">
+                        <div class="container_adicionar">
+                            <p>Nome</p>
+                            <input class="inputs input_nome" type="text" name="" id="input_nome" placeholder="...">
+                        </div>
+                        <div class="container_complemento">
+                            <p>Complemento</p>
+                            <textarea class="inputs input_complemento" id="input_complemento" placeholder="..."></textarea>
+                        </div>
                     </div>
-                    <div class="container_adicionar">
-                        <p>Código</p>
-                        <input class="inputs input_codigo" type="text" name="" id="input_codigo" placeholder="...">
-                    </div>
-                    <div class="container_adicionar">
-                        <p>Segmento</p>
-                        <input class="inputs input_segmento" type="text" name="" id="input_segmento" placeholder="...">
-                    </div>
+
+                    <div class="containers-juntos">
+                        primeiro container
+                        <div class="container1">
+                            <div class="container_adicionar">
+                                <p>Código</p>
+                                <input class="inputs input_codigo" type="text" name="" id="input_codigo" placeholder="...">
+                            </div>
+                            <div class="container_adicionar">
+                                <p>Segmento</p>
+                                <input class="inputs input_segmento" type="text" name="" id="input_segmento" placeholder="...">
+                            </div>
+                        </div>
+                    
+
+                        segundo container
+                        <div class="container2">
+                            <div class="container_adicionar">
+                                <p>Unidade</p>
+                                <input class="inputs input_unidade" type="text" name="" id="input_unidade" placeholder="...">
+                            </div>
+                            <div class="container_adicionar">
+                                <p>Quantidade</p>
+                                <input class="inputs input_quantidade" type="text" name="" id="input_quantidade" placeholder="...">
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4" class="form_email">Nome</label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Nome">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Complemento</label>
+                                <textarea type="password" class="form-control" id="inputPassword4" placeholder="Complemento"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddress">Código</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="Codigo">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddress2">Segmento</label>
+                            <input type="text" class="form-control" id="inputAddress2" placeholder="Segmento">
+                        </div>
+                        <div class="form-row selecionaveis">
+                            <div class="form-group col-md-4">
+                                <label for="inputState">Unidade</label>
+                                <select id="inputState" class="form-control label-unidade">
+                                    <option selected>pç</option>
+                                    <option>M</option>
+                                    <option>Cm</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputState">Segmento</label>
+                                <select id="inputState" class="form-control label-segmento">
+                                    <option selected>tinta</option>
+                                    <option>ferramenta</option>
+                                    <option>escritório</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="classe_do_botao">
+                            <button type="submit" class="btn btn-primary botao_enviar">Enviar</button>
+                        </div>
+                    </form>
                 </div>
 
-                <!-- segundo container -->
-                <div class="container2">
-                    <div class="container_adicionar">
-                        <p>Complemento</p>
-                        <input class="inputs input_complemento" type="text" name="" id="input_complemento" placeholder="...">
-                    </div>
-                    <div class="container_adicionar">
-                        <p>Unidade</p>
-                        <input class="inputs input_unidade" type="text" name="" id="input_unidade" placeholder="...">
-                    </div>
-                    <div class="container_adicionar">
-                        <p>Quantidade</p>
-                        <input class="inputs input_quantidade" type="text" name="" id="input_quantidade" placeholder="...">
-                    </div>
-                </div>
+                <!-- <button class="botao_enviar" onclick="EnviarItem()">Enviar</button> -->
             </div>
 
-            <button class="botao_enviar" onclick="EnviarItem()">Enviar</button>
+            <!-- <button class="botao_enviar" onclick="EnviarItem()">Enviar</button> -->
 
         </div>
     </div>
