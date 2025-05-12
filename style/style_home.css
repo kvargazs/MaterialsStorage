@@ -213,6 +213,13 @@ p {
     border: 2px solid #565e64;
 }
 
+.mensage-vazia {
+    display: none; 
+    text-align: center; 
+    margin-top: 20px; 
+    color: #343a40;
+}
+
 /* RESPONSIVIDADE - Menos colunas em telas menores */
 /* 4 colunas quando a tela for menor que 1200px */
 @media (min-width: 1201px) {

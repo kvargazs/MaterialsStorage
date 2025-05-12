@@ -3,8 +3,8 @@ import sql from 'mssql'
 
 
 const config = {
-    user: 'fellipe',  //usuário do sql
-    password: '123456',  //senha do usuário do sql
+    user: 'karol',  //usuário do sql
+    password: '12345',  //senha do usuário do sql
     server: 'DESKTOP-HOPVEQ1\\TEW_SQLEXPRESS',  //nome ou ip do servidor sql
     database: 'Storage', //nome do banco de dados
     options: {
