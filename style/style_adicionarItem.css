@@ -1,161 +1,88 @@
 body {
     padding: 0;
     margin: 0;
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif !important;
     background-color: #ededed;
 }
 
-.container_principal{
+.container_principal {
+    position: relative;
+    top: 10vh;
     left: 220px;
     width: calc(100% - 220px);
-    top: 10vh;
     height: calc(100vh - 10vh);
-    margin: 35px 0 0 220px;
-    /* padding: 50px 50px 0px 50px; */
-    background-color: white;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: #ededed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.container_central{
-    width: auto;
-    height: 650px;
-    padding: 40px 16% 0 16%;
-    background-color: #ededed;
-    /* text-align: center; */
+.containers {
+    width: 70%;
+    background-color: white;
+    padding: 30px;
     border-radius: 10px;
-}
-.container_central p{
-    font-size: 20px;
-    margin-right: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.titulo_central{
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.titulo_central {
     text-align: center;
-    margin-top: 30px;
-    margin-bottom: 45px;
-    /* background-color: white; */
+    margin: 0;
+    margin-bottom: 20px;
 }
 
-.contorno{
-    border: 5px solid white;
-    border-radius: 2%;
-    padding: 20px 0 70px 0;
-    background-color: white;
-}
-
-.containers{
-    width: auto;
-    height: 366px;
-    /* background-color: red; */
-    /* display: flex; */
-    margin-bottom: 30px;
+select.select-placeholder:invalid {
+    color: #5b636a; /* Cor mais clara, como o placeholder do Bootstrap */
 }
 
 
-form label{
-    margin-left: 30px;
+form label {
+    margin: 0;
 }
 
-.form-control{
-    width: 770px;
-    margin-left: 20px;
-    margin-bottom: 10px;
-}
-
-.label-unidade, .label-segmento{
-    width: 330px;
-}
-
-.selecionaveis{
+.form-row {
     display: flex;
-    gap: 170px;
+    gap: 20px;
 }
 
-
-
-.container1{
-    margin-right: 10px;
-    margin-left: 3.5%;
+.form-group {
+    flex: 1 1 48%;
 }
 
-.container-de-cima{
-    width: auto;
-    height: 200px;
-    /* background-color: bisque; */
-    padding-left: 200px;
-    margin-bottom: 35px;
+.select2-container--default .select2-selection--multiple {
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    margin: 0 !important;
 }
 
-.containers-juntos{
-    width: auto;
-    height: 160px;
-    /* background-color: red; */
-    display: flex;
-    margin-bottom: 80px;
+.select2-container--default .select2-selection--multiple .select2-search--inline .select2-search__field::placeholder {
+    color: #5b636a; /* Cor do placeholder padrão do Bootstrap */
+    opacity: 1;
 }
 
-.inputs{
-    width: 200px;
-}
-.input_nome{
-    margin-left: 105px;
-}
-.input_codigo{
-    margin-left: 30px;
-}
-.input_segmento{
-    margin-left: 0px;
-}
-/* .input_complemento{
-    margin-left: 19px;
-} */
- .inputs.input_complemento {
-  width: 200px;
-  height: 100px;
-  font-size: 16px;
-  margin-left: 19px;
-  padding: 10px;
-  resize: vertical; /* permite redimensionar só na vertical */
-}
-
-.input_unidade{
-    margin-left: 80px;
-}
-.input_quantidade{
-    margin-left: 44px;
-}
-
-.container_adicionar{
-    width: 405px;
-    height: 50px;
-    display: flex;
-    padding: 10px;
-    margin-bottom: 30px;
-    background-color: #ededed;
-    border-radius: 5px;
-}
-
-.container_complemento{
-    width: 405px;
-    height: 120px;
-    display: flex;
-    padding: 10px;
-    margin-bottom: 30px;
-    background-color: #ededed;
-    border-radius: 5px;
-}
-
-.container1 .container_adicionar{
-    width: 342px;
+.select2-container--default .select2-search__field {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .botao_enviar{
     width: 130px;
     height: 50px;
-    border-radius: 20px;
+    border-radius: 100px;
     background-color: rgb(60, 138, 255);
     border-color: transparent;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 20px;
     color: #ffffff;
 }
 
@@ -167,7 +94,7 @@ form label{
     background-color: rgb(35, 94, 183);
 }
 
-.classe_do_botao{
+.botao_enviar_item {
     margin-top: 10px;
     text-align: center;
 }
