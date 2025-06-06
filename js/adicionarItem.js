@@ -3,27 +3,21 @@ function EnviarItem() {
     const codigo = document.getElementById('input_codigo').value;
     const complemento = document.getElementById('input_complemento').value;
     const quantidade = document.getElementById('input_quantidade').value;
-    
-    // Segmento permite múltiplas opções (via Select2)
-    const segmento = $('#segmento').val();  // array
-
-    // Unidade é seleção simples
+    const segmento = $('#input_segmento').val();
     const unidade = document.getElementById('input_unidade').value;
 
-    // Validação
-    if (!nome || !codigo || !segmento.length || !complemento || !unidade || !quantidade) {
+    if (!nome || !codigo || !segmento || !complemento || !unidade || !quantidade) {
         alert("Todos os campos precisam ser preenchidos!");
         return;
     }
 
-    // Envia para o backend
     fetch('http://localhost:5000/inserir', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             nome,
             codigo,
-            segmento,   // array
+            segmento,
             complemento,
             unidade,
             quantidade
@@ -38,6 +32,3 @@ function EnviarItem() {
         alert('Erro ao enviar o item.');
     });
 }
-
-
-
