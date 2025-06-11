@@ -5,8 +5,8 @@ import sql from 'mssql'
 const config = {
     user: 'karol',  //usuário do sql
     password: '12345',  //senha do usuário do sql
-    server: 'DESKTOP-HOPVEQ1\\TEW_SQLEXPRESS',  //nome ou ip do servidor sql
-    database: 'Storage', //nome do banco de dados
+    server: 'UO034-S517-4260\\SQLEXPRESS',  //nome ou ip do servidor sql
+    database: 'MaterialStorage', //nome do banco de dados
     options: {
         encrypt: true,  //define se a conexão será criptografada
         trustServerCertificate: true //permite confiar no certificado ssl mesmo que seja autoassiando

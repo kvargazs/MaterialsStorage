@@ -19,7 +19,7 @@ router.post('/inserir', async (req, res) => {
         // Verifica se já existe um item com o mesmo código
         const result = await pool.request()
             .input('codigo', sql.VarChar(20), codigo)
-            .query('SELECT * FROM Itens WHERE Codigo = @codigo');
+            .query('SELECT * FROM itens WHERE Codigo = @codigo');
 
         if (result.recordset.length > 0) {
             // Já existe: atualiza a quantidade
@@ -27,7 +27,7 @@ router.post('/inserir', async (req, res) => {
                 .input('codigo', sql.VarChar(20), codigo)
                 .input('quantidade', sql.Int, quantidade)
                 .query(`
-                    UPDATE Itens 
+                    UPDATE itens 
                     SET Quantidade = Quantidade + @quantidade 
                     WHERE Codigo = @codigo
                 `);
@@ -43,7 +43,7 @@ router.post('/inserir', async (req, res) => {
                 .input('Unidade', sql.VarChar(50), unidade)
                 .input('Quantidade', sql.Int, quantidade)
                 .query(`
-                    INSERT INTO Itens (Codigo, Segmento, Descricao, Complemento, Unidade, Quantidade)
+                    INSERT INTO itens (Codigo, Segmento, Descricao, Complemento, Unidade, Quantidade)
                     VALUES (@Codigo, @Segmento, @Descricao, @Complemento, @Unidade, @Quantidade)
                 `);
 
@@ -58,14 +58,14 @@ router.post('/inserir', async (req, res) => {
 
 
 
-//ROTA PARA TRAZER OS ITENS DO BANCO PARA A TELA
+//ROTA PARA TRAZER OS itens DO BANCO PARA A TELA
 router.get('/itens', async (req, res) => {
     try {
         const pool = await poolPromise;
 
         // consulta o banco
         const result = await pool.request().query(`
-            SELECT Codigo, Descricao, Segmento, Complemento, Quantidade, Unidade FROM Itens
+            SELECT Codigo, Descricao, Segmento, Complemento, Quantidade, Unidade FROM itens
         `);
 
         res.json(result.recordset); // envia o array de itens
