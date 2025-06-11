@@ -5,13 +5,13 @@ function EnviarItem() {
     const quantidade = document.getElementById('input_quantidade').value;
     
     // Segmento permite múltiplas opções (via Select2)
-    const segmento = $('#input_segmento').val();  // array
+    const segmento = document.getElementById('input_segmento').value;
 
     // Unidade é seleção simples
     const unidade = document.getElementById('input_unidade').value;
 
     // Validação
-    if (!nome || !codigo || !segmento.length || !complemento || !unidade || !quantidade) {
+    if (!nome || !codigo || !segmento || !complemento || !unidade || !quantidade) {
         alert("Todos os campos precisam ser preenchidos!");
         return;
     }
