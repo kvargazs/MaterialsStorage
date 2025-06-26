@@ -32,6 +32,7 @@ function EnviarItem() {
     .then(res => res.text())
     .then(msg => {
         alert(msg);
+        document.getElementById("formulario").reset();
     })
     .catch(err => {
         console.error('Erro ao enviar:', err);
