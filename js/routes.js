@@ -118,5 +118,34 @@ router.put('/itens/:codigo', async (req, res) => {
     }
 });
 
+
+// ROTA LOGIN
+router.post('/login', async (req, res) => {
+    const { nome, senha } = req.body;
+
+    try {
+        const pool = await poolPromise;
+
+        // Consulta SQL com parâmetros para evitar SQL Injection
+        const result = await pool
+            .request()
+            .input('nome', nome)
+            .input('senha', senha)
+            .query(`
+                SELECT * FROM Usuarios WHERE nome = @nome AND senha = @senha
+            `);
+
+        if (result.recordset.length > 0) {
+            res.json({ sucesso: true, usuario: result.recordset[0] });
+        } else {
+            res.status(401).json({ sucesso: false, mensagem: 'Credenciais inválidas' });
+        }
+    } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        res.status(500).json({ sucesso: false, mensagem: error.message });
+    }
+});
+
+
 // exporta o roteador para ser usado no server.js
 export default router;
