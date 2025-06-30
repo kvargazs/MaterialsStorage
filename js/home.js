@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <p class="item-caracteristica item-segmento">Segmento: ${item.Segmento}</p>
                         <p class="item-caracteristica item-complemento">${item.Complemento}</p>
                         <div class="div-item-info">
-                            <p class="item-caracteristica item-quantidade">Qntd: ${item.Quantidade}</p>
-                            <p class="item-caracteristica item-unidade">Unid: ${item.Unidade}</p>
+                            <p class="item-caracteristica item-quantidade">Quantidade: ${item.Quantidade}</p>
+                            <p class="item-caracteristica item-unidade">Unidade: ${item.Unidade}</p>
                         </div>
                     `;
 
