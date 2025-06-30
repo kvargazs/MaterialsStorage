@@ -7,6 +7,9 @@ links.forEach(function (link) {
     }
 });
 
+// Variável global para armazenar o item selecionado
+let itemSelecionado = null;
+
 // MODAL DE ITENS
 document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("search");
@@ -58,18 +61,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 const updatedItems = document.querySelectorAll(".itens");
                 updatedItems.forEach(item => {
                     item.addEventListener("click", function () {
-                        const nome = item.getAttribute("data-nome");
-                        const codigo = item.getAttribute("data-codigo");
-                        const segmento = item.getAttribute("data-segmento");
-                        const complemento = item.getAttribute("data-complemento");
-                        const quantidade = item.getAttribute("data-quantidade");
-                        const unidade = item.getAttribute("data-unidade");
+                        // Salvar item selecionado na variável global
+                        itemSelecionado = {
+                            nome: item.getAttribute("data-nome"),
+                            codigo: item.getAttribute("data-codigo"),
+                            segmento: item.getAttribute("data-segmento"),
+                            complemento: item.getAttribute("data-complemento"),
+                            quantidade: item.getAttribute("data-quantidade"),
+                            unidade: item.getAttribute("data-unidade")
+                        };
 
-                        document.getElementById("modal-nome").innerHTML = `<span>${nome}</span><span style="margin: 0 8px;">–</span><span id="modal-codigo" style="color: #0d6efd;">${codigo}</span>`;
-                        document.getElementById("modal-segmento").textContent = `Segmento: ${segmento}`;
-                        document.getElementById("modal-complemento").textContent = `Complemento: ${complemento}`;
-                        document.getElementById("modal-quantidade").textContent = `Quantidade: ${quantidade}`;
-                        document.getElementById("modal-unidade").textContent = `Unidade: ${unidade}`;
+                        // Preencher modal itemModal
+                        document.getElementById("modal-nome").innerHTML = `<span>${itemSelecionado.nome}</span><span style="margin: 0 8px;">–</span><span id="modal-codigo" style="color: #0d6efd;">${itemSelecionado.codigo}</span>`;
+                        document.getElementById("modal-segmento").textContent = `Segmento: ${itemSelecionado.segmento}`;
+                        document.getElementById("modal-complemento").textContent = `Complemento: ${itemSelecionado.complemento}`;
+                        document.getElementById("modal-quantidade").textContent = `Quantidade: ${itemSelecionado.quantidade}`;
+                        document.getElementById("modal-unidade").textContent = `Unidade: ${itemSelecionado.unidade}`;
 
                         const myModal = new bootstrap.Modal(document.getElementById('itemModal'));
                         myModal.show();
@@ -96,5 +103,90 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.key === "Enter") {
             pesquisarItens();
         }
+    });
+
+
+   // Elementos usados na modal de baixa
+    const inputQuantidadeBaixa = document.getElementById('quantidadeBaixa');
+    const confirmarBaixaBtn = document.getElementById('confirmarBaixaBtn');
+
+    // Botão dar baixa
+    btnDarBaixa.addEventListener('click', function () {
+        // Esconder modal de item
+        const itemModalEl = document.getElementById('itemModal');
+        const itemModalInstance = bootstrap.Modal.getInstance(itemModalEl);
+        if (itemModalInstance) itemModalInstance.hide();
+
+        if (itemSelecionado) {
+            // Preenche nome e código
+            const nomeCodigoBaixa = document.getElementById('nomeCodigoBaixa');
+            nomeCodigoBaixa.innerHTML = `<strong>Item: </strong> ${itemSelecionado.nome} (Código: ${itemSelecionado.codigo})`;
+
+            // Preenche quantidade atual
+            const quantidadeAtualBaixa = document.getElementById('quantidadeAtualBaixa');
+            quantidadeAtualBaixa.innerHTML = `<strong>Quantidade atual: </strong> ${itemSelecionado.quantidade}`;
+
+            // Define limites no input
+            inputQuantidadeBaixa.setAttribute('min', '1');
+            inputQuantidadeBaixa.setAttribute('max', itemSelecionado.quantidade);
+            inputQuantidadeBaixa.value = '';
+        }
+
+        // Mostrar modal de baixa
+        const darBaixaModalEl = document.getElementById('darBaixaModal');
+        const darBaixaModalInstance = new bootstrap.Modal(darBaixaModalEl);
+        darBaixaModalInstance.show();
+    });
+
+    // Confirmação da baixa
+    confirmarBaixaBtn.addEventListener('click', async () => {
+    if (!itemSelecionado) {
+        alert('Nenhum item selecionado!');
+        return;
+    }
+
+    const quantidadeDigitada = parseInt(inputQuantidadeBaixa.value, 10);
+
+    if (isNaN(quantidadeDigitada) || quantidadeDigitada <= 0) {
+        alert('Digite uma quantidade válida!');
+        return;
+    }
+
+    // Calcula quantidade final após baixa
+    const quantidadeAtual = Number(itemSelecionado.quantidade);
+    if (quantidadeDigitada > quantidadeAtual) {
+        alert(`A quantidade para baixa não pode ser maior que a quantidade atual (${quantidadeAtual}).`);
+        return;
+    }
+
+    const quantidadeFinal = quantidadeAtual - quantidadeDigitada;
+
+    try {
+        const response = await fetch(`http://localhost:5000/itens/${itemSelecionado.codigo}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({quantidade: quantidadeFinal})
+    });
+
+        const data = await response.json();
+
+        if (response.ok) {
+        alert('Quantidade atualizada com sucesso!');
+        itemSelecionado.quantidade = quantidadeFinal;
+
+        const darBaixaModalEl = document.getElementById('darBaixaModal');
+        const darBaixaModalInstance = bootstrap.Modal.getInstance(darBaixaModalEl);
+        if (darBaixaModalInstance) darBaixaModalInstance.hide();
+
+        carregarItens();
+        } else {
+        alert(data.message || 'Erro ao atualizar quantidade.');
+        }
+    } catch (error) {
+        console.error('Erro ao chamar API:', error);
+        alert('Erro de conexão com o servidor.');
+    }
     });
 });
