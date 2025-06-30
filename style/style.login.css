@@ -11,7 +11,7 @@ p {
 }
 
 
-/* CAMPO DE PESQUISA */
+/* CABEÇALHO */
 .search {
     top: 0;
     left: 220px;
@@ -49,4 +49,59 @@ p {
     border-radius: 20px;
     margin-right: 1%;
     border-color: transparent;
+}
+
+/* BODY */
+.central {
+    width: 100%;
+    height: calc(100vh - 10vh);
+    background-color: #ededed;
+    padding-top: 5%;
+}
+
+.caixa_de_login {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    margin-left: 34.3%;
+    padding-top: 10px;
+    text-align: center;
+    border-radius: 3%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.caixa_de_login h1 {
+    margin-bottom: 20px;
+}
+
+.icone_login {
+    width: 80px;
+    margin-bottom: 60px;
+}
+
+.login_nome_div {
+    width: 70%;
+    margin-left: 14%;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.login_nome_label {
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.login_senha_div {
+    width: 70%;
+    margin-left: 14%;
+    display: flex;
+}
+
+.login_senha_label {
+    margin-right: 8px;
+    margin-top: 5px;
+}
+
+.botao_fazer_login {
+    margin-top: 25px;
 }

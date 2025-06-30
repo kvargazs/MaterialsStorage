@@ -21,9 +21,28 @@
     <div class="search">
         <p class="search-titulo">Storage SENAI</p>
         <div class="search-bar">
-            <input class="input-search" type="text" id="search" placeholder="   Pesquise por nome ou código de materiais...">
-            <button class="botao-search" type="button" id="buscarBtn">Buscar</button>
         </div>
     </div>
+
+    <div class="central">
+        <div class="caixa_de_login">
+            <h1>Login</h1>
+            <img  class="icone_login" src="img/icon_user.svg" alt="">
+            <div class="form-group col-md-6 login_nome_div">
+                <label for="input" class="login_nome_label">Nome:</label>
+                <input class="form-control" id="login_nome_input" name="nome" placeholder="Digite o seu nome...">
+            </div>
+            <div class="form-group col-md-6 login_senha_div">
+                <label for="input" class="login_senha_label">Senha:</label>
+                <input class="form-control" id="login_senha_input" name="senha" placeholder="Digite a sua senha...">
+            </div>
+
+            <div class="botao_fazer_login">
+                <button type="button" class="btn btn-primary botao_login" onclick="fazerLogin()">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/fazerLogin.js"></script>
 </body>
 </html>
