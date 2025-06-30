@@ -109,84 +109,90 @@ document.addEventListener("DOMContentLoaded", function () {
    // Elementos usados na modal de baixa
     const inputQuantidadeBaixa = document.getElementById('quantidadeBaixa');
     const confirmarBaixaBtn = document.getElementById('confirmarBaixaBtn');
+    const btnDarBaixa = document.getElementById('btnDarBaixa');
 
     // Botão dar baixa
     btnDarBaixa.addEventListener('click', function () {
-        // Esconder modal de item
-        const itemModalEl = document.getElementById('itemModal');
-        const itemModalInstance = bootstrap.Modal.getInstance(itemModalEl);
-        if (itemModalInstance) itemModalInstance.hide();
+        if (!itemSelecionado) return;
 
-        if (itemSelecionado) {
-            // Preenche nome e código
-            const nomeCodigoBaixa = document.getElementById('nomeCodigoBaixa');
-            nomeCodigoBaixa.innerHTML = `<strong>Item: </strong> ${itemSelecionado.nome} (Código: ${itemSelecionado.codigo})`;
+        // Preenche modal darBaixa
+        const nomeCodigoBaixa = document.getElementById('nomeCodigoBaixa');
+        nomeCodigoBaixa.innerHTML = `<strong>Item: </strong> ${itemSelecionado.nome} (Código: ${itemSelecionado.codigo})`;
 
-            // Preenche quantidade atual
-            const quantidadeAtualBaixa = document.getElementById('quantidadeAtualBaixa');
-            quantidadeAtualBaixa.innerHTML = `<strong>Quantidade atual: </strong> ${itemSelecionado.quantidade}`;
+        const quantidadeAtualBaixa = document.getElementById('quantidadeAtualBaixa');
+        quantidadeAtualBaixa.innerHTML = `<strong>Quantidade atual: </strong> ${itemSelecionado.quantidade}`;
 
-            // Define limites no input
-            inputQuantidadeBaixa.setAttribute('min', '1');
-            inputQuantidadeBaixa.setAttribute('max', itemSelecionado.quantidade);
-            inputQuantidadeBaixa.value = '';
-        }
+        inputQuantidadeBaixa.setAttribute('min', '1');
+        inputQuantidadeBaixa.setAttribute('max', itemSelecionado.quantidade);
+        inputQuantidadeBaixa.value = '';
 
-        // Mostrar modal de baixa
+        // Abrir o modal darBaixaModal
         const darBaixaModalEl = document.getElementById('darBaixaModal');
         const darBaixaModalInstance = new bootstrap.Modal(darBaixaModalEl);
         darBaixaModalInstance.show();
+
+        // Mover o foco para inputQuantidadeBaixa após o modal abrir
+        darBaixaModalEl.addEventListener('shown.bs.modal', () => {
+            inputQuantidadeBaixa.focus();
+        }, { once: true });
+
+        // Agora, só depois de abrir o darBaixaModal, esconda o itemModal
+        const itemModalEl = document.getElementById('itemModal');
+        const itemModalInstance = bootstrap.Modal.getInstance(itemModalEl);
+        if (itemModalInstance) {
+            itemModalInstance.hide();
+        }
     });
 
     // Confirmação da baixa
     confirmarBaixaBtn.addEventListener('click', async () => {
-    if (!itemSelecionado) {
-        alert('Nenhum item selecionado!');
-        return;
-    }
-
-    const quantidadeDigitada = parseInt(inputQuantidadeBaixa.value, 10);
-
-    if (isNaN(quantidadeDigitada) || quantidadeDigitada <= 0) {
-        alert('Digite uma quantidade válida!');
-        return;
-    }
-
-    // Calcula quantidade final após baixa
-    const quantidadeAtual = Number(itemSelecionado.quantidade);
-    if (quantidadeDigitada > quantidadeAtual) {
-        alert(`A quantidade para baixa não pode ser maior que a quantidade atual (${quantidadeAtual}).`);
-        return;
-    }
-
-    const quantidadeFinal = quantidadeAtual - quantidadeDigitada;
-
-    try {
-        const response = await fetch(`http://localhost:5000/itens/${itemSelecionado.codigo}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({quantidade: quantidadeFinal})
-    });
-
-        const data = await response.json();
-
-        if (response.ok) {
-        alert('Quantidade atualizada com sucesso!');
-        itemSelecionado.quantidade = quantidadeFinal;
-
-        const darBaixaModalEl = document.getElementById('darBaixaModal');
-        const darBaixaModalInstance = bootstrap.Modal.getInstance(darBaixaModalEl);
-        if (darBaixaModalInstance) darBaixaModalInstance.hide();
-
-        carregarItens();
-        } else {
-        alert(data.message || 'Erro ao atualizar quantidade.');
+        if (!itemSelecionado) {
+            alert('Nenhum item selecionado!');
+            return;
         }
-    } catch (error) {
-        console.error('Erro ao chamar API:', error);
-        alert('Erro de conexão com o servidor.');
-    }
+
+        const quantidadeDigitada = parseInt(inputQuantidadeBaixa.value, 10);
+
+        if (isNaN(quantidadeDigitada) || quantidadeDigitada <= 0) {
+            alert('Digite uma quantidade válida!');
+            return;
+        }
+
+        // Calcula quantidade final após baixa
+        const quantidadeAtual = Number(itemSelecionado.quantidade);
+        if (quantidadeDigitada > quantidadeAtual) {
+            alert(`A quantidade para baixa não pode ser maior que a quantidade atual (${quantidadeAtual}).`);
+            return;
+        }
+
+        const quantidadeFinal = quantidadeAtual - quantidadeDigitada;
+
+        try {
+            const response = await fetch(`http://localhost:5000/itens/${itemSelecionado.codigo}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ quantidade: quantidadeFinal })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert('Quantidade atualizada com sucesso!');
+                itemSelecionado.quantidade = quantidadeFinal;
+
+                const darBaixaModalEl = document.getElementById('darBaixaModal');
+                const darBaixaModalInstance = bootstrap.Modal.getInstance(darBaixaModalEl);
+                if (darBaixaModalInstance) darBaixaModalInstance.hide();
+
+                carregarItens();
+            } else {
+                alert(data.message || 'Erro ao atualizar quantidade.');
+            }
+        } catch (error) {
+            console.error('Erro ao chamar API:', error);
+            alert('Erro de conexão com o servidor.');
+        }
     });
 });
