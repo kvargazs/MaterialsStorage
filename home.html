@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="style/style_home.css">
+    <link rel="stylesheet" href="style/style_home.css?v=1.0">
     <title>Storage SENAI</title>
 </head>
 <body>
@@ -24,16 +24,7 @@
             <input class="input-search" type="text" id="search" placeholder="   Pesquise por nome ou código de materiais...">
             <button class="botao-search" type="button" id="buscarBtn">Buscar</button>
         </div>
-        <!-- dropdown de itens para baixa -->
-        <button class="botao-baixa btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Baixa</button>
-        <ul class="dropdown-menu dropdown-baixa">
-            <li><a class="dropdown-item baixa" href="#">Itens</a></li>
-            <li><a class="dropdown-item baixa" href="#">Itens</a></li>
-            <li><a class="dropdown-item baixa" href="#">Itens</a></li>
-            <li><a class="dropdown-item baixa" href="#">Itens</a></li>
-            <li><a class="dropdown-item baixa" href="#">Itens</a></li>
-            <li><a class="dropdown-item baixa" href="#">Itens</a></li>
-        </ul>
+        <div></div>
     </div>
 
     <!-- SIDEBAR -->
@@ -67,16 +58,12 @@
     <section class="container_home">
         <p class="titulo-materiais">MATERIAIS</p>
 
-        <div class="container_itens" id="itens-container">
-            <!-- Os itens serão adicionados aqui dinamicamente -->
-        </div>
+        <div class="container_itens" id="itens-container"> <!-- itens ficam aq de acordo com o banco --> </div>
 
-        <p class="mensage-vazia" id="mensagem-vazia" style="display: none; text-align: center; margin-top: 20px; color: gray;">
-            Nenhum item encontrado para a pesquisa.
-        </p>
+        <p class="mensage-vazia" id="mensagem-vazia" style="display: none; text-align: center; margin-top: 20px; color: gray;">Nenhum item encontrado para a pesquisa.</p>
     
         <!-- Modal -->
-        <div class="modal fade" id="itemModal" tabindex="-1" aria-labelledby="itemModalLabel" aria-hidden="true">
+        <div class="modal fade" id="itemModal" tabindex="-1" aria-labelledby="itemModalLabel">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -91,17 +78,39 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" id="editarBtn">Editar</button>
-                        <button type="button" class="btn btn-success">Dar baixa</button>
+                        <button type="button" class="btn btn-success" id="btnDarBaixa">Dar baixa</button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Modal Dar Baixa -->
+        <div class="modal fade" id="darBaixaModal" tabindex="-1" aria-labelledby="darBaixaModalLabel">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="darBaixaModalLabel">Dar baixa no item</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="nomeCodigoBaixa"><strong>Item: </strong></p>
+                        <p id="quantidadeAtualBaixa"><strong>Quantidade atual: </strong></p>
+                        <br>
+                        <label for="quantidadeBaixa" class="form-label">Quantidade para dar baixa:</label>
+                        <input type="number" id="quantidadeBaixa" class="form-control" min="1" placeholder="Digite a quantidade..."/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="confirmarBaixaBtn">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     
 
     <!-- BOOTSTRAP -->
-     <script src="js/home.js"></script>
+    <script src="js/home.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
 </html>

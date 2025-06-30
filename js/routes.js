@@ -75,6 +75,48 @@ router.get('/itens', async (req, res) => {
     }
 });
 
+// ROTA PARA DAR BAIXA (atualizar quantidade de um item)
+router.put('/itens/:codigo', async (req, res) => {
+    const { codigo } = req.params;
+    const { quantidade } = req.body; // agora quantidade é o valor final para salvar
+
+    if (quantidade == null || isNaN(quantidade) || quantidade < 0) {
+        return res.status(400).json({ message: 'Quantidade inválida' });
+    }
+
+    try {
+        const pool = await poolPromise;
+
+        const result = await pool.request()
+            .input('codigo', sql.VarChar(20), codigo)
+            .query('SELECT Quantidade FROM itens WHERE Codigo = @codigo');
+
+        if (result.recordset.length === 0) {
+            return res.status(404).json({ message: 'Item não encontrado' });
+        }
+
+        // Não calcula mais a subtração aqui
+        // Só valida se quantidade não é negativa
+        if (quantidade < 0) {
+            return res.status(400).json({ message: 'Quantidade não pode ser negativa' });
+        }
+
+        await pool.request()
+            .input('codigo', sql.VarChar(20), codigo)
+            .input('quantidade', sql.Int, quantidade)
+            .query(`
+                UPDATE itens
+                SET Quantidade = @quantidade
+                WHERE Codigo = @codigo
+            `);
+
+        res.status(200).json({ message: 'Quantidade atualizada com sucesso', novaQuantidade: quantidade });
+
+    } catch (error) {
+        console.error('Erro ao atualizar quantidade:', error);
+        res.status(500).json({ message: error.message });
+    }
+});
 
 
 // ROTA LOGIN
