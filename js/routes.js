@@ -147,5 +147,36 @@ router.post('/login', async (req, res) => {
 });
 
 
+
+// ROTA PARA DELETAR UM ITEM PELO CÓDIGO
+router.delete('/itens/:codigo', async (req, res) => {
+  const { codigo } = req.params;
+
+  try {
+    const pool = await poolPromise;
+
+    // Verifica se o item existe
+    const result = await pool.request()
+      .input('codigo', sql.VarChar(20), codigo)
+      .query('SELECT * FROM itens WHERE Codigo = @codigo');
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: 'Item não encontrado' });
+    }
+
+    // Deleta o item
+    await pool.request()
+      .input('codigo', sql.VarChar(20), codigo)
+      .query('DELETE FROM itens WHERE Codigo = @codigo');
+
+    res.status(200).json({ message: 'Item excluído com sucesso!' });
+
+  } catch (error) {
+    console.error('Erro ao excluir item:', error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 // exporta o roteador para ser usado no server.js
 export default router;

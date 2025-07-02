@@ -109,4 +109,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Inicializa tudo
     carregarItens();
+
+
+
+
+    const btnExcluir = document.getElementById('btnExcluir');
+
+    btnExcluir.addEventListener('click', async () => {
+        if (!itemSelecionado) {
+            alert('Nenhum item selecionado!');
+            return;
+        }
+
+        if (!confirm(`Tem certeza que deseja excluir o item "${itemSelecionado.nome}"?`)) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5000/itens/${itemSelecionado.codigo}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                alert('Item excluído com sucesso!');
+                const itemModal = bootstrap.Modal.getInstance(document.getElementById('itemModal'));
+                if (itemModal) itemModal.hide();
+
+                carregarItens(); // Atualiza a lista de itens
+            } else {
+                const data = await response.json();
+                alert(data.message || 'Erro ao excluir o item.');
+            }
+        } catch (error) {
+            console.error('Erro ao chamar API:', error);
+            alert('Erro de conexão com o servidor.');
+        }
+    });
 });
