@@ -56,34 +56,36 @@ p {
     width: 100%;
     height: calc(100vh - 10vh);
     background-color: #ededed;
-    padding-top: 5%;
+    padding-top: 6%;
 }
 
 .caixa_de_login {
     width: 400px;
-    height: 400px;
+    height: 450px;
     background-color: white;
-    margin-left: 34.3%;
-    padding-top: 10px;
+    /* margin-left: 34.3%; */
+    margin-left: 36.9%;
+    padding-top: 15px;
     text-align: center;
     border-radius: 3%;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .caixa_de_login h1 {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .icone_login {
     width: 80px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .login_nome_div {
     width: 70%;
     margin-left: 14%;
-    display: flex;
+    /* display: flex; */
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .login_nome_label {
@@ -94,7 +96,8 @@ p {
 .login_senha_div {
     width: 70%;
     margin-left: 14%;
-    display: flex;
+    /* display: flex; */
+    text-align: left;
 }
 
 .login_senha_label {
