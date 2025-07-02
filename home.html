@@ -24,7 +24,28 @@
             <input class="input-search" type="text" id="search" placeholder="   Pesquise por nome ou código de materiais...">
             <button class="botao-search" type="button" id="buscarBtn">Buscar</button>
         </div>
-        <div>Filtro</div>
+        <!-- Botão de Filtro -->
+        <div class="dropdown d-inline-block ms-3">
+            <button class="btn btn-filtro dropdown-toggle" type="button" data-bs-toggle="dropdown">Filtro</button>
+            <div class="dropdown-menu p-3" style="min-width: 300px; max-height: 300px; overflow-y: auto;">
+                <p><strong>Segmento</strong></p>
+                <div id="filtroSegmento">
+                    <!-- Checkboxes de segmento via JS -->
+                </div>
+
+                <hr>
+                <p><strong>Unidade</strong></p>
+
+                <div id="filtroUnidade">
+                    <!-- Checkboxes de unidade via JS -->
+                </div>
+                <hr>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary btn-sm" id="aplicarFiltroBtn">Aplicar Filtro</button>
+                    <button class="btn btn-secondary btn-sm" id="limparFiltroBtn">Limpar Filtros</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- SIDEBAR -->
@@ -111,6 +132,7 @@
 
     <!-- BOOTSTRAP -->
     <script src="js/home.js"></script>
+    <script src="js/filtros.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
 </html>
