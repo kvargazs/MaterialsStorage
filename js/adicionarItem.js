@@ -39,6 +39,3 @@ function EnviarItem() {
         alert('Erro ao enviar o item.');
     });
 }
-
-
-
