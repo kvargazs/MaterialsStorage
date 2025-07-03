@@ -28,10 +28,36 @@ document.addEventListener('DOMContentLoaded', () => {
     inputComplemento.value = item.complemento || '';
     inputQuantidade.value = item.quantidade || 0;
 
-    //Preenche os selects de unidade e segmento
-const inputUnidade = document.getElementById('input_unidade');
-const inputSegmento = document.getElementById('input_segmento');
+    //Preenche os selects de unidade e segmento - codigo antigo
+    //const inputUnidade = document.getElementById('input_unidade');
+    //const inputSegmento = document.getElementById('input_segmento');
 
+    //document.getElementById('input_unidade').value = item.unidade || '';
+    //document.getElementById('input_segmento').value = item.segmento || '';
+
+
+
+    //Preenche os selects de unidade e segmento e traz eles ja preenchidos nos campos
+    function setSelectValue(selectElement, value) {
+        if (!value) return;
+
+        const optionExists = [...selectElement.options].some(opt => opt.value === value);
+        if (optionExists) {
+            selectElement.value = value;
+        } else {
+            const newOption = new Option(value, value, true, true);
+            selectElement.add(newOption);
+        }
+    }
+
+    const inputUnidade = document.getElementById('input_unidade');
+    const inputSegmento = document.getElementById('input_segmento');
+
+    setSelectValue(inputUnidade, item.unidade);
+    setSelectValue(inputSegmento, item.segmento);
+
+
+    
     //Código fica desabilitado pra edicao
     inputCodigo.disabled = true;
 
@@ -43,8 +69,8 @@ const inputSegmento = document.getElementById('input_segmento');
         const unidade = inputUnidade.value.trim();
         const segmento = inputSegmento.value.trim();
 
-        if (!nome || !codigo || isNaN(quantidade) || quantidade < 0) {
-            alert('Preencha todos os campos corretamente.');
+        if (!nome || !codigo || isNaN(quantidade) || quantidade < 0 || !unidade || !segmento) {
+            alert('Preencha todos os campos corretamente, incluindo Unidade e Segmento.');
             return;
         }
 
