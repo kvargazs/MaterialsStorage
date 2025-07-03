@@ -24,6 +24,8 @@ async function fazerLogin() {
     .then(res => res.json())
     .then(data => {
         if (data.sucesso) {
+            localStorage.setItem('usuario', JSON.stringify(data.usuario));
+            alert(usuario.nome, usuario.tipo);
             window.location.href = 'home.html';
         } else {
             alert(data.mensagem || "Falha no login.");
@@ -95,3 +97,21 @@ async function fazerLogin() {
     //     alert('Erro no servidor.');
     // }
 }
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Obtenha os dados do usuário do localStorage (ou onde você os armazenou)
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    // Verifique se o usuário é do tipo "adm"
+    if (usuario && usuario.tipo === 'adm') {
+        // Se for, adicione a opção "Adicionar Usuário" ao dropdown
+        const dropdownMenu = document.getElementById('dropdown-menu');
+        
+        const adicionarUsuarioItem = document.createElement('li');
+        adicionarUsuarioItem.innerHTML = `<a class="dropdown-item" href="adicionar_usuario.html">Adicionar Usuário</a>`;
+        
+        dropdownMenu.insertBefore(adicionarUsuarioItem, dropdownMenu.children[0]); // Insere antes da primeira opção
+    }
+});
