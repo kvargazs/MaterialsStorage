@@ -7,8 +7,6 @@ import { sql, poolPromise } from './db.js';
 // cria um roteador (router) para agrupar as rotas do servidor
 const router = express.Router();
 
-
-
 //ROTA PARA INSERIR ITEM
 router.post('/inserir', async (req, res) => {
     const { nome, codigo, segmento, complemento, unidade, quantidade } = req.body;
@@ -75,48 +73,43 @@ router.get('/itens', async (req, res) => {
     }
 });
 
-// ROTA PARA DAR BAIXA (atualizar quantidade de um item)
-router.put('/itens/:codigo', async (req, res) => {
-    const { codigo } = req.params;
-    const { quantidade } = req.body; // agora quantidade é o valor final para salvar
+// ROTA PARA DAR BAIXA (atualizar SOMENTE a quantidade de um item)
+router.put('/itens/:codigo/quantidade', async (req, res) => {
+  const { codigo } = req.params;
+  const { quantidade } = req.body;
 
-    if (quantidade == null || isNaN(quantidade) || quantidade < 0) {
-        return res.status(400).json({ message: 'Quantidade inválida' });
+  if (quantidade == null || isNaN(quantidade) || quantidade < 0) {
+    return res.status(400).json({ message: 'Quantidade inválida' });
+  }
+
+  try {
+    const pool = await poolPromise;
+
+    const result = await pool.request()
+      .input('codigo', sql.VarChar(20), codigo)
+      .query('SELECT Quantidade FROM itens WHERE Codigo = @codigo');
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: 'Item não encontrado' });
     }
 
-    try {
-        const pool = await poolPromise;
+    await pool.request()
+      .input('codigo', sql.VarChar(20), codigo)
+      .input('quantidade', sql.Int, quantidade)
+      .query(`
+        UPDATE itens
+        SET Quantidade = @quantidade
+        WHERE Codigo = @codigo
+      `);
 
-        const result = await pool.request()
-            .input('codigo', sql.VarChar(20), codigo)
-            .query('SELECT Quantidade FROM itens WHERE Codigo = @codigo');
+    res.status(200).json({ message: 'Quantidade atualizada com sucesso', novaQuantidade: quantidade });
 
-        if (result.recordset.length === 0) {
-            return res.status(404).json({ message: 'Item não encontrado' });
-        }
-
-        // Não calcula mais a subtração aqui
-        // Só valida se quantidade não é negativa
-        if (quantidade < 0) {
-            return res.status(400).json({ message: 'Quantidade não pode ser negativa' });
-        }
-
-        await pool.request()
-            .input('codigo', sql.VarChar(20), codigo)
-            .input('quantidade', sql.Int, quantidade)
-            .query(`
-                UPDATE itens
-                SET Quantidade = @quantidade
-                WHERE Codigo = @codigo
-            `);
-
-        res.status(200).json({ message: 'Quantidade atualizada com sucesso', novaQuantidade: quantidade });
-
-    } catch (error) {
-        console.error('Erro ao atualizar quantidade:', error);
-        res.status(500).json({ message: error.message });
-    }
+  } catch (error) {
+    console.error('Erro ao atualizar quantidade:', error);
+    res.status(500).json({ message: error.message });
+  }
 });
+
 
 
 // ROTA LOGIN
@@ -175,6 +168,44 @@ router.delete('/itens/:codigo', async (req, res) => {
     console.error('Erro ao excluir item:', error);
     res.status(500).json({ message: error.message });
   }
+});
+
+
+
+
+
+// ROTA PARA EDITAR ITEM COMPLETO PELO CÓDIGO
+router.put('/itens/:codigo', async (req, res) => {
+    const { codigo } = req.params;
+    const { nome, complemento, quantidade, unidade, segmento } = req.body;
+
+    console.log('Atualizando item:', { codigo, nome, complemento, quantidade, unidade, segmento });
+
+    try {
+        const pool = await poolPromise;
+
+        await pool.request()
+            .input('codigo', sql.VarChar(20), codigo)
+            .input('nome', sql.VarChar(255), nome)
+            .input('complemento', sql.VarChar(255), complemento)
+            .input('quantidade', sql.Int, quantidade)
+            .input('unidade', sql.VarChar(50), unidade)
+            .input('segmento', sql.VarChar(100), segmento)
+            .query(`
+                UPDATE itens
+                SET Descricao = @nome,
+                    Complemento = @complemento,
+                    Quantidade = @quantidade,
+                    Unidade = @unidade,
+                    Segmento = @segmento
+                WHERE Codigo = @codigo
+            `);
+
+        res.status(200).json({ message: 'Item atualizado com sucesso' });
+    } catch (error) {
+        console.error('Erro ao atualizar item:', error);
+        res.status(500).json({ message: error.message });
+    }
 });
 
 
