@@ -99,7 +99,7 @@ async function fazerLogin() {
 }
 
 
-
+// Executar após o carregamento da página
 document.addEventListener("DOMContentLoaded", function() {
     // Obtenha os dados do usuário do localStorage (ou onde você os armazenou)
     const usuario = JSON.parse(localStorage.getItem('usuario'));
@@ -115,3 +115,4 @@ document.addEventListener("DOMContentLoaded", function() {
         dropdownMenu.insertBefore(adicionarUsuarioItem, dropdownMenu.children[0]); // Insere antes da primeira opção
     }
 });
+

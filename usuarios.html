@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/style_home.css">
+    <link rel="stylesheet" href="style/style_usuarios.css">
+    <title>Storage SENAI</title>
+</head>
+<body>
+    <div class="search">
+        <p class="search-titulo">Storage SENAI</p>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div>
+            <!-- Menu de Navegação -->
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="home.html" class="nav-link text-white">Página inicial</a>
+                </li>
+                <li class="nav-item">
+                    <a href="adicionarItem.html" class="nav-link text-white">Adicionar Item</a>
+                </li>
+                <li class="nav-item">
+                    <a href="historico.html" class="nav-link text-white">Histórico</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="container_dropdown">
+            <hr class="text-white">
+            <!-- Dropdown do Usuário -->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Perfil </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"></a>Configurações</li>
+                    <li><a class="dropdown-item" href="#"></a>Sair</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container_principal" href="#home">
+        <div class="container_config">
+            <h1>Usuários</h1>
+            <input class="form-control" id="input_usuario" placeholder="Digite o nome do usuário...">
+            <div class="container_usuarios">
+
+            </div>
+
+            <!-- Button trigger modal -->
+            <div class="botao_adicionar">
+                <button type="button" class="btn btn-primary botao_adicionar_usuario" data-bs-toggle="modal" data-bs-target="#exampleModal">Adicionar</button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar Usuário</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group col-md-6">
+                            <label for="input" class="form_nome">Nome:</label>
+                            <input class="form-control" id="input_nome_usuario" placeholder="Digite o nome do usuário...">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="input" class="form_senha">Senha:</label>
+                            <input class="form-control" id="input_senha_usuario" placeholder="Digite a senha...">
+                        </div>
+                        <form class="tipo_de_usuario">
+                            <label for="tipo_usuario">Tipo de usuário:</label>
+                            <br>
+                            <select name="tipo_usuario" id="select_tipo_usuario">
+                                <option value="adm">Administrador</option>
+                                <option value="comum">Comum</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary botao_salvar_usuario" onclick="AdicionarUsuario()">Salvar</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOTSTRAP -->
+    <script src="js/usuarios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+
+    <!-- jQuery e Select2 JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

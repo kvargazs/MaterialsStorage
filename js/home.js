@@ -145,4 +145,15 @@ document.addEventListener("DOMContentLoaded", function () {
             alert('Erro de conexão com o servidor.');
         }
     });
+
+    
+    // Esconder botões de excluir e editar se o usuário não for adm
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    if (!usuario || usuario.tipo !== 'adm') {
+        // Esconde os botões se o tipo não for "adm"
+        document.getElementById('btnEditar').style.display = 'none';
+        document.getElementById('btnExcluir').style.display = 'none';
+    }
+
 });
