@@ -23,16 +23,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Botão de aplicar filtro
+    //Botão de aplicar filtro
     document.getElementById("aplicarFiltroBtn").addEventListener("click", aplicarFiltros);
 
-    // Botão de limpar filtro
+    //Botão de limpar filtro
     document.getElementById("limparFiltroBtn").addEventListener("click", function (e) {
-        e.stopPropagation(); // Evita fechar o dropdown
+        e.stopPropagation(); //não fecha o dropdown
         limparFiltros();
     });
 
-    // --------- Código da modal de baixa, dar baixa etc. ----------
+
+
+    //PARA DAR BAIXA E MUDAR A QUANTIDADE NO DB
     const inputQuantidadeBaixa = document.getElementById('quantidadeBaixa');
     const confirmarBaixaBtn = document.getElementById('confirmarBaixaBtn');
     const btnDarBaixa = document.getElementById('btnDarBaixa');
@@ -40,11 +42,9 @@ document.addEventListener("DOMContentLoaded", function () {
     btnDarBaixa.addEventListener('click', function () {
         if (!itemSelecionado) return;
 
-        document.getElementById('nomeCodigoBaixa').innerHTML =
-            `<strong>Item: </strong> ${itemSelecionado.nome} (Código: ${itemSelecionado.codigo})`;
+        document.getElementById('nomeCodigoBaixa').innerHTML = `<strong>Item: </strong> ${itemSelecionado.nome} (Código: ${itemSelecionado.codigo})`;
 
-        document.getElementById('quantidadeAtualBaixa').innerHTML =
-            `<strong>Quantidade atual: </strong> ${itemSelecionado.quantidade}`;
+        document.getElementById('quantidadeAtualBaixa').innerHTML = `<strong>Quantidade atual: </strong> ${itemSelecionado.quantidade}`;
 
         inputQuantidadeBaixa.setAttribute('min', '1');
         inputQuantidadeBaixa.setAttribute('max', itemSelecionado.quantidade);
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const quantidadeFinal = quantidadeAtual - quantidadeDigitada;
 
         try {
-            const response = await fetch(`http://localhost:5000/itens/${itemSelecionado.codigo}`, {
+            const response = await fetch(`http://localhost:5000/itens/${itemSelecionado.codigo}/quantidade`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ quantidade: quantidadeFinal })
@@ -107,12 +107,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Inicializa tudo
-    carregarItens();
 
 
-
-
+    // EXCLUIR ITEM
     const btnExcluir = document.getElementById('btnExcluir');
 
     btnExcluir.addEventListener('click', async () => {
@@ -145,6 +142,35 @@ document.addEventListener("DOMContentLoaded", function () {
             alert('Erro de conexão com o servidor.');
         }
     });
+
+
+
+    //EDITAR ITEM
+    const btnEditar = document.getElementById('btnEditar'); // ou outro seletor correto
+
+    btnEditar.addEventListener('click', () => {
+    if (!itemSelecionado) {
+        alert("Nenhum item selecionado para editar.");
+        return;
+    }
+
+    const itemParaEditar = {
+        id: itemSelecionado.id || null,
+        nome: itemSelecionado.nome,
+        segmento: itemSelecionado.segmento,
+        complemento: itemSelecionado.complemento,
+        quantidade: itemSelecionado.quantidade,
+        unidade: itemSelecionado.unidade,
+        codigo: itemSelecionado.codigo,
+    };
+
+    localStorage.setItem('itemParaEditar', JSON.stringify(itemParaEditar));
+    window.location.href = 'editarItem.html';
+    });
+
+
+    // Inicializa tudo
+    carregarItens();
 
     
     // Esconder botões de excluir e editar se o usuário não for adm
