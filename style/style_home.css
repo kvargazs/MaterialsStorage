@@ -150,6 +150,7 @@ p {
 
 
 
+/* CSS DO FILTRO */
 .dropdown-menu.p-3 {
     color: white;
     padding: 15px !important;
@@ -235,8 +236,9 @@ p {
 
 
 /* ESTILO DE CADA ITEM */
-.itens {
-    width: calc(20% - 20px);
+.itens {    
+    flex: 1 1 250px; /* largura minima */
+    max-width: 300px;
     height: auto;
     background-color: rgb(255, 255, 255);
     padding: 20px;
@@ -371,35 +373,23 @@ p {
     justify-content: space-between;
 }
 
+
+
 /* Modal: Nome e Código */
 #modal-nome {
-    display: inline-flex;
-    align-items: center; /* Alinha o nome e o código verticalmente */
     font-weight: bold;
-    margin-right: 10px; /* Dá um espaçamento entre nome e código */
+    font-size: 18px;
 }
 
 #modal-codigo {
     color: #007bff; /* Cor azul para o código */
-    margin-left: 5px; /* Distância entre o nome e o código */
-}
-
-#modal-nome span {
-    margin-left: 5px;
 }
 
 #modal-segmento {
     font-weight: 600;
-    color: #333; /* Um tom mais escuro, opcional */
+    color: #333;
 }
 
 .modal-body p {
-    margin-bottom: 10px; /* ou ajuste conforme preferir */
+    margin-bottom: 10px;
 }
-
-
-
-
-
-
-
