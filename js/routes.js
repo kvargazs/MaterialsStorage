@@ -253,5 +253,41 @@ router.post('/adicionarusuario', async (req, res) => {
     }
 });
 
+
+
+// ROTA PARA ALTERAR SENHA DO USUÁRIO
+router.post('/alterarsenha', async (req, res) => {
+    const { nome, novaSenha } = req.body;
+
+    if (!nome || !novaSenha) {
+        return res.status(400).json({ sucesso: false, mensagem: 'Nome e nova senha são obrigatórios' });
+    }
+
+    try {
+        const pool = await poolPromise;
+
+        // Verifica se o usuário existe
+        const result = await pool.request()
+            .input('nome', sql.VarChar(50), nome)
+            .query('SELECT * FROM usuarios WHERE nome = @nome');
+
+        if (result.recordset.length === 0) {
+            return res.status(404).json({ sucesso: false, mensagem: 'Usuário não encontrado' });
+        }
+
+        // Atualiza a senha do usuário
+        await pool.request()
+            .input('nome', sql.VarChar(50), nome)
+            .input('novaSenha', sql.VarChar(100), novaSenha)
+            .query('UPDATE usuarios SET senha = @novaSenha WHERE nome = @nome');
+
+        res.json({ sucesso: true, mensagem: 'Senha alterada com sucesso!' });
+
+    } catch (error) {
+        console.error('Erro ao alterar a senha:', error);
+        res.status(500).json({ sucesso: false, mensagem: 'Erro interno do servidor' });
+    }
+});
+
 // exporta o roteador para ser usado no server.js
 export default router;

@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     searchInput.addEventListener("input", pesquisarItens);
     searchButton.addEventListener("click", pesquisarItens);
     searchInput.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
+        if  (event.key === "Enter") {
             pesquisarItens();
         }
     });
@@ -181,5 +181,4 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('btnEditar').style.display = 'none';
         document.getElementById('btnExcluir').style.display = 'none';
     }
-
 });

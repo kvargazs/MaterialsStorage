@@ -23,7 +23,7 @@ function EnviarItem() {
         body: JSON.stringify({
             nome,
             codigo,
-            segmento,   // array
+            segmento,
             complemento,
             unidade,
             quantidade

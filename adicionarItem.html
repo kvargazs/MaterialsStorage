@@ -15,11 +15,6 @@
 <body>
     <div class="search">
         <p class="search-titulo">Storage SENAI</p>
-        <div class="search-bar">
-            <input class="input-search" type="text" id="search" placeholder="   Pesquise por nome ou código de materiais...">
-            <button class="botao-search" type="button_search">Buscar</button>
-        </div>
-        <div></div>
     </div>
 
     <!-- Sidebar -->
@@ -34,20 +29,25 @@
                     <a href="adicionarItem.html" class="nav-link text-white active">Adicionar Item</a>
                 </li>
                 <li class="nav-item">
-                    <a href="historico.html" class="nav-link text-white">Histórico</a>
+                    <a href="historico.html" class="nav-link text-white" id="menu-historico">Histórico</a>
+                </li>
+                <li class="nav-item" id="menu-historico">
+                    <a href="cadastrarUser.html" id="menu-cadastro" class="nav-link text-white">Cadastrar Usuário</a>
                 </li>
             </ul>
         </div>
         
         <div class="container_dropdown">
-            <hr class="text-white">
             <!-- Dropdown do Usuário -->
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Perfil </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#"></a>Configurações</li>
-                    <li><a class="dropdown-item" href="#"></a>Sair</li>
-                </ul>
+            <div class="container_dropdown">
+                <hr class="text-white">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Perfil </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="configuracao.html">Configurações</a></li>
+                        <li><a class="dropdown-item" href="login.html">Sair</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -174,5 +174,7 @@
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="js/Historico.js"></script>
 </body>
 </html>

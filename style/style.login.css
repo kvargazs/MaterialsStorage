@@ -10,12 +10,11 @@ p {
     margin: 0;
 }
 
-
 /* CABEÇALHO */
 .search {
     top: 0;
     left: 220px;
-    width: 100%; 
+    width: 100%;
     height: 10vh;
     background-color: #343a40;
     z-index: 1000;
@@ -23,14 +22,12 @@ p {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);  
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .search-titulo {
     font-size: 26px;
     color: #ffffff;
-    text-align: center;
-    margin-bottom: 0px !important;
     font-weight: 500;
 }
 
@@ -54,20 +51,21 @@ p {
 /* BODY */
 .central {
     width: 100%;
-    height: calc(100vh - 10vh);
+    min-height: calc(100vh - 10vh);
     background-color: #ededed;
     padding-top: 6%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .caixa_de_login {
-    width: 400px;
-    height: 450px;
+    width: 90%;
+    max-width: 400px;
     background-color: white;
-    /* margin-left: 34.3%; */
-    margin-left: 36.9%;
-    padding-top: 15px;
+    padding: 25px 35px;
     text-align: center;
-    border-radius: 3%;
+    border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -77,34 +75,66 @@ p {
 
 .icone_login {
     width: 80px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .login_nome_div {
-    width: 70%;
-    margin-left: 14%;
-    /* display: flex; */
-    margin-bottom: 10px;
+    width: 100%;
+    margin-bottom: 15px;
     text-align: left;
-}
-
-.login_nome_label {
-    margin-right: 10px;
-    margin-top: 5px;
 }
 
 .login_senha_div {
-    width: 70%;
-    margin-left: 14%;
-    /* display: flex; */
+    width: 100%;
+    margin-bottom: 5px;
     text-align: left;
 }
 
+.login_nome_label,
 .login_senha_label {
-    margin-right: 8px;
-    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;
 }
 
 .botao_fazer_login {
     margin-top: 25px;
+}
+
+.botao_login {
+    width: 100%;
+    padding: 10px;
+}
+
+/* Link Esqueci minha senha */
+.esqueci-senha {
+    width: 100%;
+    text-align: right;
+}
+
+.esqueci-senha a {
+    text-decoration: none;
+    color: black;
+    font-size: 0.9rem;
+}
+
+.esqueci-senha a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade extra */
+@media (max-width: 480px) {
+    .search {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .input-search {
+        width: 100%;
+    }
 }
