@@ -302,36 +302,39 @@ router.put('/itens/:codigo', async (req, res) => {
 
 // ROTA PARA ADICIONAR USUÁRIO
 router.post('/adicionarusuario', async (req, res) => {
-    const { nome_usuario, senha_usuario, tipo_usuario} = req.body;
+    const { nome_usuario, senha_usuario, tipo_usuario } = req.body;
 
     try {
         const pool = await poolPromise;
 
-        // Verifica se já existe um item com o mesmo nome
+        // Corrigido: verificar pelo campo correto (nome)
         const result = await pool.request()
-            .input('nome_usuario', sql.VarChar(20), nome_usuario)
-            .query('SELECT * FROM usuarios WHERE Codigo = @nome_usuario');
+            .input('nome_usuario', sql.VarChar(50), nome_usuario)
+            .query('SELECT * FROM usuarios WHERE nome = @nome_usuario');
 
-        if (result.recordset.length == 0) {
-            
-            // O usuário não existe: faz o insert
-            await pool.request()
-                .input('nome_usuario', sql.VarChar(20), nome_usuario)
-                .input('senha_usuario', sql.VarChar(100), senha_usuario)
-                .input('tipo_usuario', sql.VarChar(255), tipo_usuario)
-                .query(`
-                    INSERT INTO usuarios (nome, senha, tipo)
-                    VALUES (@nome_usuario, @senha_usuario, @tipo_usuario)
-                `);
-
-            res.status(200).send('Usuário adicionado com sucesso!');
+        if (result.recordset.length > 0) {
+            // Usuário já existe
+            return res.status(400).json({ sucesso: false, mensagem: 'Usuário já existe' });
         }
 
+        // Usuário não existe, insere
+        await pool.request()
+            .input('nome_usuario', sql.VarChar(50), nome_usuario)
+            .input('senha_usuario', sql.VarChar(100), senha_usuario)
+            .input('tipo_usuario', sql.VarChar(50), tipo_usuario)
+            .query(`
+                INSERT INTO usuarios (nome, senha, tipo)
+                VALUES (@nome_usuario, @senha_usuario, @tipo_usuario)
+            `);
+
+        res.status(201).json({ sucesso: true, mensagem: 'Usuário adicionado com sucesso!' });
+
     } catch (error) {
-        console.error('Erro ao adicionar:', error);
-        res.status(500).json({ message: error.message });
+        console.error('Erro ao adicionar usuário:', error);
+        res.status(500).json({ sucesso: false, mensagem: 'Erro interno do servidor' });
     }
 });
+
 
 
 
