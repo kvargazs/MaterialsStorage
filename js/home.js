@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("search");
     const searchButton = document.getElementById("buscarBtn");
 
+    const usuarioJSON = localStorage.getItem('usuario');
+    const usuarioInfos = JSON.parse(usuarioJSON);
+
+
     // Eventos de busca por texto
     searchInput.addEventListener("input", pesquisarItens);
     searchButton.addEventListener("click", pesquisarItens);
@@ -32,6 +36,40 @@ document.addEventListener("DOMContentLoaded", function () {
         limparFiltros();
     });
 
+
+    //PEGAR MOVIMENTAÇÕES DE PESQUISA PELO BOTÃO
+    buscarBtn.addEventListener('click', async () => {
+        const nomeUsuario = usuarioInfos.nome.trim();
+        const barraDePesquisa = document.getElementById('search').value;
+
+        if (!barraDePesquisa) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5000/registropesquisa`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nomeUsuario,
+                    barraDePesquisa
+                })
+            });
+
+            if (response.ok) {
+                const itemModal = bootstrap.Modal.getInstance(document.getElementById('itemModal'));
+                if (itemModal) itemModal.hide();
+
+                carregarItens(); // Atualiza a lista de itens
+            } else {
+                const data = await response.json();
+                alert(data.message || 'Erro ao registrar pesquisa de item.');
+            }
+        } catch (error) {
+            console.error('Erro ao chamar API:', error);
+            alert('Erro de conexão com o servidor.');
+        }
+    });
 
 
     //PARA DAR BAIXA E MUDAR A QUANTIDADE NO DB
@@ -109,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
     // EXCLUIR ITEM
     const btnExcluir = document.getElementById('btnExcluir');
 
@@ -122,9 +161,29 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        const nome = itemSelecionado.nome.trim();
+        const quantidade = itemSelecionado.quantidade;
+        const unidade = itemSelecionado.unidade.trim();
+        const nomeUsuario = usuarioInfos.nome.trim();
+
+
+        // const dadosExcluir = {
+        //     nome,
+        //     quantidade,
+        //     unidade,
+        //     nomeUsuario,
+        // }
+
         try {
             const response = await fetch(`http://localhost:5000/itens/${itemSelecionado.codigo}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nome,
+                    quantidade,
+                    unidade,
+                    nomeUsuario,
+                })
             });
 
             if (response.ok) {

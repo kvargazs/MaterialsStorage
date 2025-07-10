@@ -9,7 +9,7 @@ const router = express.Router();
 
 //ROTA PARA INSERIR ITEM
 router.post('/inserir', async (req, res) => {
-    const { nome, codigo, segmento, complemento, unidade, quantidade } = req.body;
+    const { nome, codigo, segmento, complemento, unidade, quantidade, nomeUsuario } = req.body;
 
     try {
         const pool = await poolPromise;
@@ -45,7 +45,21 @@ router.post('/inserir', async (req, res) => {
                     VALUES (@Codigo, @Segmento, @Descricao, @Complemento, @Unidade, @Quantidade)
                 `);
 
-            res.status(200).send('Item inserido com sucesso!');
+            //res.status(200).send('Item inserido com sucesso!');
+            // Insere o registro na tabela 'movimentacoes'
+            await pool.request()
+                .input('codigo', sql.VarChar(20), codigo)
+                .input('nome', sql.VarChar(255), nome)
+                .input('quantidade', sql.Int, quantidade)
+                .input('unidade', sql.VarChar(50), unidade)
+                .input('usuarioNome', sql.VarChar(255), nomeUsuario)
+                .input('dataMovimentacao', sql.DateTime, new Date()) // Adiciona timestamp atual
+                .query(`
+                    INSERT INTO movimentacoes (Codigo, Nome, Movimentacao, Quantidade, Unidade, UsuarioNome, DataMovimentacao)
+                    VALUES (@codigo, @nome, 'adicionar', @quantidade, @unidade, @usuarioNome, @dataMovimentacao)
+                `);
+
+            res.status(200).json({ message: 'Item inserido e movimentação registrada com sucesso' });
         }
 
     } catch (error) {
@@ -154,6 +168,7 @@ router.post('/login', async (req, res) => {
 // ROTA PARA DELETAR UM ITEM PELO CÓDIGO
 router.delete('/itens/:codigo', async (req, res) => {
   const { codigo } = req.params;
+  const { nome, quantidade, unidade, nomeUsuario} = req.body;
 
   try {
     const pool = await poolPromise;
@@ -172,7 +187,23 @@ router.delete('/itens/:codigo', async (req, res) => {
       .input('codigo', sql.VarChar(20), codigo)
       .query('DELETE FROM itens WHERE Codigo = @codigo');
 
-    res.status(200).json({ message: 'Item excluído com sucesso!' });
+     //res.status(200).json({ message: 'Item excluído com sucesso!' });
+
+    // Insere o registro na tabela 'movimentacoes'
+    await pool.request()
+        .input('codigo', sql.VarChar(20), codigo)
+        .input('nome', sql.VarChar(255), nome)
+        .input('quantidade', sql.Int, quantidade)
+        .input('unidade', sql.VarChar(50), unidade)
+        .input('usuarioNome', sql.VarChar(255), nomeUsuario)
+        .input('dataMovimentacao', sql.DateTime, new Date()) // Adiciona timestamp atual
+        .query(`
+            INSERT INTO movimentacoes (Codigo, Nome, Movimentacao, Quantidade, Unidade, UsuarioNome, DataMovimentacao)
+            VALUES (@codigo, @nome, 'excluir', @quantidade, @unidade, @usuarioNome, @dataMovimentacao)
+        `);
+
+
+    res.status(200).json({ message: 'Item excluído e movimentação registrada com sucesso' });
 
   } catch (error) {
     console.error('Erro ao excluir item:', error);
@@ -185,9 +216,10 @@ router.delete('/itens/:codigo', async (req, res) => {
 
 
 // ROTA PARA EDITAR ITEM COMPLETO PELO CÓDIGO
+/*
 router.put('/itens/:codigo', async (req, res) => {
     const { codigo } = req.params;
-    const { nome, complemento, quantidade, unidade, segmento } = req.body;
+    const { nome, complemento, quantidade, unidade, segmento, usuarioNome } = req.body;
 
     console.log('Atualizando item:', { codigo, nome, complemento, quantidade, unidade, segmento });
 
@@ -217,6 +249,54 @@ router.put('/itens/:codigo', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+*/
+router.put('/itens/:codigo', async (req, res) => {
+    const { codigo } = req.params;
+    const { nome, complemento, quantidade, unidade, segmento, usuarioNome } = req.body;
+
+    console.log('Atualizando item:', { codigo, nome, complemento, quantidade, unidade, segmento });
+
+    try {
+        const pool = await poolPromise;
+
+        // Atualiza o item na tabela 'itens'
+        await pool.request()
+            .input('codigo', sql.VarChar(20), codigo)
+            .input('nome', sql.VarChar(255), nome)
+            .input('complemento', sql.VarChar(255), complemento)
+            .input('quantidade', sql.Int, quantidade)
+            .input('unidade', sql.VarChar(50), unidade)
+            .input('segmento', sql.VarChar(100), segmento)
+            .query(`
+                UPDATE itens
+                SET Descricao = @nome,
+                    Complemento = @complemento,
+                    Quantidade = @quantidade,
+                    Unidade = @unidade,
+                    Segmento = @segmento
+                WHERE Codigo = @codigo
+            `);
+
+        // Insere o registro na tabela 'movimentacoes'
+        await pool.request()
+            .input('codigo', sql.VarChar(20), codigo)
+            .input('nome', sql.VarChar(255), nome)
+            .input('quantidade', sql.Int, quantidade)
+            .input('unidade', sql.VarChar(50), unidade)
+            .input('usuarioNome', sql.VarChar(255), usuarioNome)
+            .input('dataMovimentacao', sql.DateTime, new Date()) // Adiciona timestamp atual
+            .query(`
+                INSERT INTO movimentacoes (Codigo, Nome, Movimentacao, Quantidade, Unidade, UsuarioNome, DataMovimentacao)
+                VALUES (@codigo, @nome, 'editar', @quantidade, @unidade, @usuarioNome, @dataMovimentacao)
+            `);
+
+        res.status(200).json({ message: 'Item atualizado e movimentação registrada com sucesso' });
+    } catch (error) {
+        console.error('Erro ao atualizar item:', error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
 
 
 
@@ -286,6 +366,31 @@ router.post('/alterarsenha', async (req, res) => {
     } catch (error) {
         console.error('Erro ao alterar a senha:', error);
         res.status(500).json({ sucesso: false, mensagem: 'Erro interno do servidor' });
+    }
+});
+
+
+// ROTA PARA REGISTRAR PESQUISA DE MOVIMENTAÇÃO
+router.post('/registropesquisa', async (req, res) => {
+    const { nomeUsuario, barraDePesquisa} = req.body;
+
+    try {
+        const pool = await poolPromise;
+
+        await pool.request()
+            .input('nome', sql.VarChar(255), barraDePesquisa)
+            .input('usuarioNome', sql.VarChar(255), nomeUsuario)
+            .input('dataMovimentacao', sql.DateTime, new Date()) // Adiciona timestamp atual
+            .query(`
+                INSERT INTO registrosPesquisa (Pesquisa, UsuarioNome, DataMovimentacao)
+                VALUES (@nome, @usuarioNome, @dataMovimentacao)
+            `);
+
+        res.status(200).send('registro feito!');
+
+    } catch (error) {
+        console.error('Erro ao registrar:', error);
+        res.status(500).json({ message: error.message });
     }
 });
 

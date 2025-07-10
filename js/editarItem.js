@@ -2,12 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Pega o item do localStorage
     const itemJSON = localStorage.getItem('itemParaEditar');
+    const usuarioJSON = localStorage.getItem('usuario');
 
     const item = JSON.parse(itemJSON);
+    const usuarioInfos = JSON.parse(usuarioJSON);
 
     console.log('Item completo do localStorage:', item);
     console.log('Valor de item.unidade:', item.unidade);
     console.log('Valor de item.segmento (do localStorage):', item.segmento);
+    console.log('Usuario: ', usuarioInfos.nome);
 
     //Pega os elementos do form
     const inputNome = document.getElementById('input_nome');
@@ -68,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const quantidade = parseInt(inputQuantidade.value, 10);
         const unidade = inputUnidade.value.trim();
         const segmento = inputSegmento.value.trim();
+        const usuarioNome = usuarioInfos.nome.trim();
 
         if (!nome || !codigo || isNaN(quantidade) || quantidade < 0 || !unidade || !segmento) {
             alert('Preencha todos os campos corretamente, incluindo Unidade e Segmento.');
@@ -80,7 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
             complemento,
             quantidade,
             unidade,
-            segmento
+            segmento,
+            usuarioNome
         };
 
         try {

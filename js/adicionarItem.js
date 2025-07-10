@@ -10,6 +10,10 @@ function EnviarItem() {
     // Unidade é seleção simples
     const unidade = document.getElementById('input_unidade').value;
 
+    const usuarioJSON = localStorage.getItem('usuario');
+    const usuarioInfos = JSON.parse(usuarioJSON);
+    const nomeUsuario = usuarioInfos.nome.trim();
+
     // Validação
     if (!nome || !codigo || !segmento || !complemento || !unidade || !quantidade) {
         alert("Todos os campos precisam ser preenchidos!");
@@ -26,7 +30,8 @@ function EnviarItem() {
             segmento,
             complemento,
             unidade,
-            quantidade
+            quantidade,
+            nomeUsuario
         })
     })
     .then(res => res.text())
