@@ -9,25 +9,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function cadastrarUsuario() {
-        const nome = document.getElementById('cadNome').value;
-        const senha = document.getElementById('cadSenha').value;
+        const nome = document.getElementById('cadNome').value.trim();
+        const senha = document.getElementById('cadSenha').value.trim();
         const tipo = document.getElementById('cadTipo').value;
-
-        fetch('http://seu-backend.com/api/cadastrar', {
+    
+        if (!nome || !senha || !tipo) {
+            document.getElementById('mensagem').textContent = "Por favor, preencha todos os campos.";
+            return false;
+        }
+    
+        fetch('http://seu-backend.com/api/adicionarusuario', {  // Ajuste da rota pra coincidir com seu backend
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nome, senha, tipo })
+            body: JSON.stringify({ nome_usuario: nome, senha_usuario: senha, tipo_usuario: tipo })
         })
         .then(res => res.json())
         .then(data => {
-            document.getElementById('mensagem').textContent = data.mensagem || 'Cadastro realizado!';
+            // Exibe mensagem de sucesso ou erro
+            if (data.sucesso === false || data.message || data.mensagem) {
+                document.getElementById('mensagem').textContent = data.mensagem || data.message || 'Erro no cadastro.';
+            } else {
+                document.getElementById('mensagem').textContent = 'Cadastro realizado com sucesso!';
+                document.getElementById('formCadastro').reset();
+            }
         })
         .catch(err => {
             console.error(err);
             document.getElementById('mensagem').textContent = "Erro no cadastro.";
         });
-
-        return false;
+    
+        return false; // evita o reload da página
     }
 
     function recuperarSenha() {

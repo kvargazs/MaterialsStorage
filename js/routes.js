@@ -312,7 +312,7 @@ router.post('/adicionarusuario', async (req, res) => {
             .input('nome_usuario', sql.VarChar(20), nome_usuario)
             .query('SELECT * FROM usuarios WHERE Codigo = @nome_usuario');
 
-        if (result.recordset.length = 0) {
+        if (result.recordset.length == 0) {
             
             // O usuário não existe: faz o insert
             await pool.request()

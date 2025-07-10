@@ -3,9 +3,9 @@ import sql from 'mssql'
 
 
 const config = {
-    user: 'fellipe',  //usuário do sql
-    password: '123456',  //senha do usuário do sql
-    server: 'UO034-S517-4256\\SQLEXPRESS',  //nome ou ip do servidor sql
+    user: 'producao',  //usuário do sql
+    password: '12345678',  //senha do usuário do sql
+    server: 'UO034-S517-4267\\SQLEXPRESS',  //nome ou ip do servidor sql
     database: 'MaterialStorage', //nome do banco de dados
     options: {
         encrypt: true,  //define se a conexão será criptografada

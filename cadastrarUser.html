@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="style/style_adicionarItem.css" />
         <link rel="stylesheet" href="style/cadastrarUser.css" />
     </head>
+
     <body>
         <!-- Header -->
         <div class="search">
@@ -58,22 +59,25 @@
             <div class="containers_cadastro">
                 <form class="formCadastro" id="formCadastro" onsubmit="return cadastrarUsuario()">
                     <div class="form-group col-md-6">
-                        <label for="input" class="form_nome">Login:</label>
-                        <input class="form-control" id="input_nome" placeholder="Digite o login do usuário...">
+                        <label for="cadNome" class="form_nome">Login:</label>
+                        <input class="form-control" id="cadNome" placeholder="Digite o login do usuário..." required />
                     </div>
-
+                
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Complemento:</label>
-                        <input class="form-control" id="input_complemento" placeholder="Digite uma senha para o usuário...">
+                        <label for="cadSenha">Senha:</label>
+                        <input class="form-control" id="cadSenha" placeholder="Digite uma senha para o usuário..." type="password" required />
                     </div>
-                    <label for="inputPassword4">Usuário:</label>
+                
+                    <label for="cadTipo">Usuário:</label>
                     <select id="cadTipo" class="form-control mb-3" required>
                         <option value="" disabled selected>Selecione o tipo de usuário</option>
                         <option value="Administrador">Administrador</option>
                         <option value="Usuário">Usuário</option>
                     </select>
+                
                     <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
                 </form>
+                
 
                 <!-- Formulário de Recuperação de Senha -->
                 <form id="formRecuperar" class="d-none" onsubmit="return recuperarSenha()">
